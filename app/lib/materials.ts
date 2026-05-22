@@ -464,6 +464,162 @@ export const materials: Material[] = [
       "Vapour severely irritates eyes, nose, and lungs. Concentrated solutions burn skin and bleach paint. Never combine with bleach (releases chloramines) or with acids (heat).",
   },
   {
+    slug: "spirit-of-wine",
+    name: "Spirit of Wine",
+    aka: ["Rectified Spirit", "Ethanol", "Aqua Vitae"],
+    formula: "C₂H₅OH",
+    glyph: "🝆",
+    type: "derived",
+    appearance: "Clear, colourless, mobile liquid; faintly sweet odour; burns with a clean blue flame.",
+    about:
+      "Ethanol concentrated by repeated distillation of wine. The first organic compound to be isolated and rectified in pure form, and the solvent in which much of the rest of organic chemistry first dissolved.",
+    madeFrom: [{ material: "wine" }],
+    experimentSlug: "aqua-vitae",
+    hazards: "Highly flammable. The vapour ignites readily and tends to pool in low places.",
+  },
+  {
+    slug: "vinegar",
+    name: "Vinegar",
+    aka: ["Acetum", "Sour Wine"],
+    formula: "CH₃COOH (in water)",
+    glyph: "🜢",
+    type: "derived",
+    appearance: "Pale yellow to dark amber liquid; sharply sour to taste; pungent smell.",
+    about:
+      "Wine left exposed to air sours, as acetic-acid bacteria oxidise its ethanol to acetic acid. The result is the oldest known weak acid: vinegar. The alchemists used it as a solvent, a cosmetic, a corrosive for soft metals, and as the active vapour in the white-lead stack process.",
+    madeFrom: [
+      { material: "spirit-of-wine", note: "Slow oxidation by airborne Acetobacter bacteria." },
+    ],
+    preparation: [
+      "Pour wine into a wide-mouthed jar, cover loosely with a cloth.",
+      "Let stand in a warm place; a leathery mother of vinegar forms on the surface within weeks.",
+      "When the wine has turned sharp, strain off the liquid; this is the vinegar.",
+      "Distil if a strong, clear product is required.",
+    ],
+    hazards: "Mild at culinary strength. Concentrated (glacial) acetic acid is corrosive and combustible.",
+  },
+  {
+    slug: "heavy-spar",
+    name: "Heavy Spar",
+    aka: ["Baryte", "Barite", "Lapis Bononiensis"],
+    formula: "BaSO₄",
+    glyph: "🜨",
+    type: "base",
+    appearance: "Heavy white to grey crystalline lumps; surprisingly dense for a non-metallic stone.",
+    about:
+      "A common mineral and the heaviest of the white sulfates — its remarkable density gave it its name. Reduced with charcoal it yields the phosphorescent Bologna Stone. Today it is the principal source of barium chemistry and the weighting agent in oil-drilling muds.",
+    sources: [
+      {
+        region: "Monte Paderno, Bologna",
+        note: "The original source of Casciarolo's stones; surface nodules of remarkable purity, prized through the 17th and 18th centuries.",
+      },
+      {
+        region: "Cumbria and Cornwall, England",
+        note: "Worked as a by-product of lead mining since the 18th century.",
+      },
+      {
+        region: "China (modern)",
+        note: "The world's largest producer; mined for the oil and gas drilling industry.",
+      },
+    ],
+    hazards: "Insoluble and chemically inert in itself. Reduction to barium sulfide produces a toxic compound; soluble barium salts are acutely poisonous.",
+  },
+  {
+    slug: "tin",
+    name: "Tin",
+    aka: ["Stannum", "Jupiter", "Cassiterides"],
+    formula: "Sn",
+    glyph: "♃",
+    type: "base",
+    appearance: "Soft, silver-white, malleable metal; bends with an audible cry from the slipping of crystal planes.",
+    about:
+      "The lesser metal of the Bronze Age — alloyed with copper at one part in ten, it gave the bronze that named an epoch. Smelted by simply roasting cassiterite (SnO₂) over charcoal, tin was the rare half of the bronze equation, and the search for it drove some of the earliest long-distance trade.",
+    sources: [
+      {
+        region: "Cornwall and Devon, England",
+        note: "The Cassiterides — Tin Isles — of Greek geography. Worked from at least 2000 BCE; Phoenician and Roman traders bought tin here for the Mediterranean bronze industry.",
+      },
+      {
+        region: "Erzgebirge, Bohemia/Saxony",
+        note: "The medieval European source; the mountains' name simply means Ore Mountains.",
+      },
+      {
+        region: "Malaysia, Indonesia, Bolivia (modern)",
+        note: "The Bangka-Belitung islands and the Andean tin belt now supply the bulk of world demand.",
+      },
+    ],
+    hazards: "Tin metal is nearly non-toxic; organotin compounds, however, are among the more harmful synthetic chemicals known.",
+  },
+  {
+    slug: "lead",
+    name: "Lead",
+    aka: ["Plumbum", "Saturn"],
+    formula: "Pb",
+    glyph: "♄",
+    type: "base",
+    appearance: "Heavy, soft, blue-grey metal; cuts with a knife; leaves a grey streak on paper.",
+    about:
+      "The metal of Saturn — heaviest, dullest, and most leaden of the seven classical metals. Easy to smelt from galena (PbS) by simple roasting, it became the metal of Roman pipes, medieval roofs, printers' type, and the cosmetic ceruse. Its slow toxicity may have contributed to the decline of more than one civilisation.",
+    sources: [
+      {
+        region: "Río Tinto and Cartagena, Spain",
+        note: "Roman lead mines so vast that their isotopic signature is detectable in Greenland ice cores.",
+      },
+      {
+        region: "The Pennines and Derbyshire, England",
+        note: "Worked from the Roman period continuously into the 19th century.",
+      },
+      {
+        region: "Broken Hill, Australia (modern)",
+        note: "One of the great lead-zinc-silver ore bodies; mined since 1885.",
+      },
+    ],
+    hazards: "Cumulative neurotoxin with no safe blood level. Tetraethyl lead in petrol is thought to have raised crime rates in the cities of the twentieth century; the chemistry has been argued over for decades, the epidemiology much less so.",
+  },
+  {
+    slug: "sal-ammoniac",
+    name: "Sal Ammoniac",
+    aka: ["Ammonium Chloride", "Nūshādir", "Volatile Salt of the Lamps"],
+    formula: "NH₄Cl",
+    glyph: "🜹",
+    type: "derived",
+    appearance: "White crystalline solid; sublimes without melting; sharp salty taste.",
+    about:
+      "The universal flux of soldering and one of the oldest chemicals of commerce. Originally gathered as a sublimate from the soot of camel-dung fires; later prepared synthetically from spirit of hartshorn and spirit of salt.",
+    madeFrom: [
+      { material: "aqueous-ammonia" },
+      { material: "hcl" },
+    ],
+    experimentSlug: "sal-ammoniac",
+    hazards: "The dust irritates eyes and lungs; heating releases ammonia and HCl gases.",
+  },
+  {
+    slug: "pyrolusite",
+    name: "Pyrolusite",
+    aka: ["Black Manganese", "Manganesium Nigrum", "Glassmakers' Soap"],
+    formula: "MnO₂",
+    glyph: "🜜",
+    type: "base",
+    appearance: "Black or steel-grey crystalline mineral; sooty to the touch; rubs off as a dark powder.",
+    about:
+      "A common manganese ore that Roman and medieval glassmakers used to clear the green tint from window glass — hence its old name, glassmakers' soap. Scheele used it in 1774 to liberate chlorine from hydrochloric acid, the discovery that set up Berthollet's bleach fifteen years later.",
+    sources: [
+      {
+        region: "Caucasus (Chiatura, Georgia)",
+        note: "One of the largest manganese deposits in the world; mined since the 1880s.",
+      },
+      {
+        region: "Crimean and Ukrainian deposits",
+        note: "Worked since classical antiquity as a black colouring oxide and glass-clearing agent.",
+      },
+      {
+        region: "Postmasburg and Kalahari, South Africa (modern)",
+        note: "The world's largest manganese reserves, vital to steelmaking.",
+      },
+    ],
+    hazards: "Manganese dust is a chronic lung and neurological hazard at industrial exposures; in the laboratory it is far less acutely toxic than the chlorine it can liberate.",
+  },
+  {
     slug: "potash",
     name: "Potash",
     aka: ["Salt of Tartar", "Pot Ashes", "Salt of Wormwood"],

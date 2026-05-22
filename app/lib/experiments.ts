@@ -471,6 +471,309 @@ export const experiments: Experiment[] = [
     lore:
       "The Victorian smelling salt was a slug of solid ammonium carbonate carried in a small bottle; a sniff revived the swooning by a sharp reflex inhalation. The same compound, in the kitchen, is the leavening agent in nineteenth-century Scandinavian biscuits — when you bite a hartshorn cookie, you are tasting an alchemical preparation that has been continuously made since the 1400s.",
   },
+  {
+    slug: "sweet-oil-of-vitriol",
+    name: "Sweet Oil of Vitriol",
+    aka: ["Diethyl Ether", "Spiritus Sulphurico-Aethereus", "Ether"],
+    glyph: "🜸",
+    era: "1540",
+    origin: "Wittenberg, Saxony",
+    discoverer: "Valerius Cordus",
+    hazardLevel: 4,
+    tagline:
+      "An oddly sweet, ice-cold liquid struck from spirit of wine and oil of vitriol — three centuries later, the substance that abolished pain.",
+    history:
+      "Valerius Cordus, a young professor at Wittenberg, mixed oil of vitriol with spirit of wine and observed a new substance distilling over — light, volatile, sweet to the smell, freezing cold in the hand. He called it the sweet oil of vitriol, and his contemporary Paracelsus noted that fowls who drank it 'sleep for a good while' and woke unharmed. The observation lay fallow for three hundred years. In 1846 the Boston dentist William Morton, prompted by the chemist Charles Jackson, administered ether to a patient at Massachusetts General Hospital while a tumour was excised from his jaw. The patient felt nothing. Surgery as a tolerable procedure begins from that morning; the announcement was telegraphed across the world within weeks.",
+    reagents: [
+      { archaic: "Spirit of Wine", modern: "Ethanol (C₂H₅OH)", note: "Strong rectified spirit, four times distilled", materialSlug: "spirit-of-wine" },
+      { archaic: "Oil of Vitriol", modern: "Sulfuric acid (H₂SO₄)", note: "Catalyst — not consumed", materialSlug: "sulfuric-acid" },
+    ],
+    procedure: [
+      "Charge a glass retort with strong oil of vitriol; warm to about 140 °C.",
+      "Drip rectified spirit of wine slowly onto the hot acid; vapours rise at once.",
+      "The vapours pass through a long, well-cooled receiver and condense to a clear, mobile liquid that smells faintly fruity.",
+      "Wash the receiver's contents with water and dry over potash; the upper layer is the ether.",
+    ],
+    chemistry: {
+      equation:
+        "2 C₂H₅OH + H₂SO₄ → (C₂H₅)₂O + H₂O + H₂SO₄",
+      explanation:
+        "Sulfuric acid protonates ethanol's hydroxyl, turning it into a leaving group; a second molecule of ethanol displaces water to form the ether. The acid is regenerated and so the process is catalytic — small quantities of acid convert large quantities of alcohol. The product, diethyl ether, boils at 34.6 °C, evaporates so fast that the bottle frosts in summer, and depresses the central nervous system at concentrations of 3-5 % in inhaled air. Crawford Long had used it as an anaesthetic in Georgia in 1842 but did not publish; Morton's 1846 demonstration is the one history remembers.",
+    },
+    hazards: [
+      "Vapour is heavier than air; pools in low places and ignites from a static spark.",
+      "Forms explosive peroxides on long storage in air — old bottles have killed chemists.",
+      "Narcotic at low concentrations; deeply anaesthetic at high; the margin between unconscious and dead is narrow.",
+    ],
+    lore:
+      "When the news of Morton's demonstration reached London, the surgeon Robert Liston — famous for amputating a leg in two and a half minutes, and once, in haste, three of his assistant's fingers — used ether on a patient and afterwards said: 'This Yankee dodge, gentlemen, beats mesmerism hollow.' The age of conscious surgery, with its restraints and its howling, ended that week.",
+  },
+  {
+    slug: "vermillion",
+    name: "Vermillion",
+    aka: ["Cinnabar", "Chinese Red", "Minium of the Greeks", "Zhū shā (硃砂)"],
+    glyph: "🜓",
+    era: "c. 800 CE (Arabic synthesis); used natively far earlier",
+    origin: "China and the Arabic world; later Italy",
+    discoverer: "Synthesis attributed to Jābir ibn Hayyān",
+    hazardLevel: 4,
+    tagline:
+      "A brilliant scarlet pigment, drawn out of the marriage of quicksilver and brimstone — the colour of cardinals, of seal-paste, and of the manuscripts of the Middle Ages.",
+    history:
+      "Ground from natural cinnabar ore, vermillion was used in Neolithic burials, in Roman frescoes (the walls of Pompeii are red with it), and in the cosmetics of the Tang court. The synthesis — combining the two principles, mercury and sulfur, by sublimation — was first systematically described by Jābir, then refined in twelfth-century Italy. Cennino Cennini's handbook of 1390 gives the recipe and warns that the powder is brilliant on first grinding but darkens in time. The Chinese seal-paste, made by binding ground vermillion in castor oil and silk fibre, is still made by the same process today.",
+    reagents: [
+      { archaic: "Quicksilver", modern: "Mercury (Hg)", materialSlug: "mercury" },
+      { archaic: "Brimstone", modern: "Sulfur (S₈)", note: "Mercury and sulfur in roughly equal weights", materialSlug: "sulfur" },
+    ],
+    procedure: [
+      "Triturate mercury and sulfur together in a stone mortar until the silver beads vanish into a uniform black mass — Aethiops mineral.",
+      "Pack the mass into a stout earthenware aludel and apply a gentle fire.",
+      "The black sulfide sublimes and recondenses on the cool upper chamber as a deep crimson crust — the dry-process vermillion.",
+      "Grind the crust under water for hours, even days; the longer the grinding, the brighter the red.",
+    ],
+    chemistry: {
+      equation:
+        "Hg + S → HgS (black, metacinnabar) → Δ → α-HgS (red, cinnabar)",
+      explanation:
+        "Mercury and sulfur combine spontaneously when triturated, but the first-formed product is the black cubic polymorph, metacinnabar. Heating above 350 °C converts it to the red hexagonal polymorph — the same crystal structure as natural cinnabar. The colour comes from a 2.0 eV band gap, which absorbs the violet and blue and reflects the entire red end of the spectrum. The historical darkening of vermillion in oil paintings is the slow reverse transition, accelerated by chloride contamination.",
+    },
+    hazards: [
+      "Mercury vapour is liberated at every stage; ventilation is essential.",
+      "Mercury sulfide itself is insoluble and chemically inert; the powdered pigment is among the safer mercury compounds, but should not be ingested.",
+      "Roman miners at Almadén worked vermillion grinding mills and died young of mercurial tremors.",
+    ],
+    lore:
+      "Cennini called the synthetic kind 'made by alchemy in the retort' and warned painters not to trust the source: 'the longer it is kept on the stone with water, the more perfect it becomes. But beware of those who sell it pure, for I have known some to dilute it with brick-dust.'",
+  },
+  {
+    slug: "bologna-stone",
+    name: "The Bologna Stone",
+    aka: ["Lapis Solaris", "Sun-Sponge", "Litheosphorus"],
+    glyph: "🜠",
+    era: "1603",
+    origin: "Monte Paderno, near Bologna",
+    discoverer: "Vincenzo Casciarolo",
+    hazardLevel: 3,
+    tagline:
+      "A heavy stone, calcined with charcoal, that drank in sunlight and gave it back in the dark — the first synthetic phosphor.",
+    history:
+      "Casciarolo, a Bolognese cobbler and amateur alchemist, found heavy white pebbles on the slopes of Monte Paderno and, hoping they might be gold-bearing, calcined them with linseed-oil-soaked charcoal in a strong fire. The product, plunged into the dark, glowed an eerie pale orange for hours after exposure to daylight. The news travelled fast: Galileo wrote of it, Athanasius Kircher devoted pages to it, and the stone became one of the great wonders of the seventeenth century, displayed in cabinets and to crowned heads. It was the first prepared substance to phosphoresce by storing light, and the ancestor of every glow-in-the-dark toy and emergency exit sign.",
+    reagents: [
+      { archaic: "Heavy Spar", modern: "Baryte / barium sulfate (BaSO₄)", note: "Found as white nodules near Bologna", materialSlug: "heavy-spar" },
+      { archaic: "Black Coals", modern: "Charcoal (C)", note: "Reductant", materialSlug: "charcoal" },
+      { archaic: "—", modern: "An organic flux — linseed oil, egg white, or honey", note: "Casciarolo used linseed; later recipes used honey" },
+    ],
+    procedure: [
+      "Grind the heavy stones to powder and mix with an equal weight of charcoal and a binder of linseed oil.",
+      "Form the paste into small cakes and dry.",
+      "Calcine in a strong reducing fire — surrounded by coals, sealed from the air — for several hours.",
+      "Cool slowly. Hold the resulting cakes to sunlight, then carry them into a dark room: they shine.",
+    ],
+    chemistry: {
+      equation:
+        "BaSO₄ + 4 C → BaS + 4 CO↑   (BaS + traces of Cu, Mn, Bi → phosphor)",
+      explanation:
+        "Charcoal reduces barium sulfate to barium sulfide at red heat. Pure BaS is not strongly phosphorescent on its own — the slow afterglow comes from trace impurities (copper, bismuth, manganese) that act as luminescence centres, storing electrons in lattice traps from which they fall back to the ground state over minutes to hours. The Bologna stone is dim by modern standards (strontium aluminate doped with europium and dysprosium, the modern glow-pigment, is a hundred times brighter), but every persistent-phosphor system is a descendant of Casciarolo's accidental find.",
+    },
+    hazards: [
+      "Barium sulfide reacts with moist air to release hydrogen sulfide — rotten-egg gas, toxic at low concentrations.",
+      "Soluble barium salts (chloride, hydroxide) are acutely poisonous; BaS hydrolyses slowly to Ba(OH)₂.",
+      "The calcination releases carbon monoxide and must be done with good ventilation.",
+    ],
+    lore:
+      "Galileo, examining a stone sent to him by a Bolognese friend, wrote: 'It receives the light, swallows it, and renders it again after some hours, as though it were a sponge for the Sun.' The metaphor — lapis solaris, the solar sponge — stuck. Every glowing watch dial and exit sign on earth is a great-grandchild of the Bologna stone.",
+  },
+  {
+    slug: "sal-ammoniac",
+    name: "Sal Ammoniac",
+    aka: ["Ammoniacum", "Volatile Salt of the Lamps", "Nūshādir"],
+    glyph: "🜹",
+    era: "Antiquity → 9th century (refined)",
+    origin: "Siwa Oasis, Egypt; later refined in Persia",
+    discoverer: "Egyptian priests of Ammon; refined by the Arab alchemists",
+    hazardLevel: 2,
+    tagline:
+      "A pungent white salt sublimed from the soot of camel-dung fires beside the temple of Ammon — the universal flux of metalwork.",
+    history:
+      "Pliny describes a salt gathered as a sublimate on the rafters of the temple of Ammon in the Egyptian desert, where pilgrims burnt the dung of their camels for fuel. The salt — ammonium chloride — took its name from the god, as did the element ammonia after it. The Arab alchemists distilled and recrystallised the salt under the name nūshādir, found that it could clean the surfaces of metals so that solder would flow, and made it indispensable to every working smith for a millennium. It is still the flux in the cup of every tinsmith's iron and the active ingredient of zinc-carbon dry cells.",
+    reagents: [
+      { archaic: "Camel-dung soot", modern: "Animal-waste smoke condensate", note: "Source of both ammonia and chloride from urea and salt content" },
+      { archaic: "—", modern: "Alternative: Spirit of Hartshorn + Spirit of Salt", note: "Cleaner synthesis from already-distilled spirits", materialSlug: "aqueous-ammonia" },
+    ],
+    procedure: [
+      "Collect the soot from camel-dung or seaweed fires; the Egyptian temple chimneys yielded the original supply.",
+      "Mix the soot with water and let stand; the salt slowly dissolves out.",
+      "Filter, then evaporate to dryness in shallow iron pans.",
+      "Re-sublime the crude salt in a covered crucible for a pure white crystalline product.",
+    ],
+    chemistry: {
+      equation:
+        "NH₃ (from urea pyrolysis) + HCl (from animal salts) → NH₄Cl",
+      explanation:
+        "Urea in camel dung pyrolyses to ammonia at the temperatures of an open fire; sodium chloride in the dung gives off small quantities of hydrogen chloride when reacted with the organic acids and sulfates present. The two gases meet in the cooler upper chimney and combine on the surfaces as ammonium chloride — a fine white sublimate. The salt has the curious property of decomposing back into the two gases on heating and recombining on cooling, which is why it sublimes without melting and why it acts as a flux: the heat of the soldering iron releases HCl that cleans the metal's oxide just as the solder touches.",
+    },
+    hazards: [
+      "Inhalation of the dust irritates the lungs; concentrated ammonia vapour from heating it is sharper still.",
+      "Mixed with strong alkali, ammonia gas is released — dangerous in confined spaces.",
+      "The salt itself, in small doses, was once an expectorant in medicine.",
+    ],
+    lore:
+      "When the temple of Ammon fell into ruin and the camel caravans changed their routes, the Persian alchemists worked out the synthetic route, and Europe imported the salt from them for the next eight centuries. The English word ammonia was coined by the chemist Bergman in 1782 as a Latinisation of the salt's Arabic name — meaning, in effect, 'the gas of the salt of the temple of Ammon.' Every nitrogen fertiliser today carries the god's name in its etymology.",
+  },
+  {
+    slug: "mosaic-gold",
+    name: "Mosaic Gold",
+    aka: ["Aurum Musivum", "Painters' Gold", "Tin Bisulfide"],
+    glyph: "🜞",
+    era: "13th century",
+    origin: "Latin Europe",
+    discoverer: "Anonymous; in the corpus of the Pseudo-Geber",
+    hazardLevel: 3,
+    tagline:
+      "Flakes of golden lustre struck from tin, mercury, sulfur, and sal ammoniac — a counterfeit gold the alchemists themselves preferred for cheap gilding.",
+    history:
+      "When the Pseudo-Geber's Summa Perfectionis circulated in late-medieval Europe, it gave a recipe for a substance described as gold made by art — flakes of a deep golden colour, lustrous as the metal itself, but obtained in plenty from base reagents. The product was used to gild book bindings, frame mouldings, and the carved wooden statues of churches that could not afford leaf. Boyle reported on it in 1661, and the chemists who eventually identified it as tin disulfide named it stannic sulfide; the painters never stopped calling it mosaic gold.",
+    reagents: [
+      { archaic: "Tin", modern: "Tin (Sn)", note: "Cornish or Bohemian tin, granulated", materialSlug: "tin" },
+      { archaic: "Quicksilver", modern: "Mercury (Hg)", note: "Amalgamates the tin", materialSlug: "mercury" },
+      { archaic: "Brimstone", modern: "Sulfur (S₈)", materialSlug: "sulfur" },
+      { archaic: "Sal Ammoniac", modern: "Ammonium chloride (NH₄Cl)", note: "Sublimation aid — sweeps the volatile flakes upward", materialSlug: "sal-ammoniac" },
+    ],
+    procedure: [
+      "Amalgamate the granulated tin with mercury, warming the mixture in an iron ladle.",
+      "Grind the amalgam to a fine grey powder and mix thoroughly with sulfur and sal ammoniac in equal parts.",
+      "Pack the mass into a tall glass flask with a wide bottom and a narrow neck.",
+      "Bury the flask in a sand bath and heat slowly over a day; mercury and excess sulfur sublime away first, then the mosaic gold itself condenses higher in the neck as glittering bronze-gold flakes.",
+      "Break the flask, recover the flakes — they are too thin and brittle to grind, and are stored in twists of paper.",
+    ],
+    chemistry: {
+      equation:
+        "Sn + 2 S + heat (with Hg and NH₄Cl as transporters) → SnS₂↑",
+      explanation:
+        "Tin disulfide forms in hexagonal flakes whose layered structure (a tin sheet sandwiched between two sulfur sheets) reflects light as a single crystal face — hence the metallic golden lustre. Mercury and sal ammoniac do not enter the product; they act as transport agents, carrying tin and sulfur up the flask as volatile intermediates and depositing SnS₂ where the temperature is right. It is one of the earliest examples of vapour-phase crystal growth, three centuries before that idea was formalised.",
+    },
+    hazards: [
+      "Mercury vapour is liberated throughout the sublimation; ventilation is essential.",
+      "Sal ammoniac decomposes to ammonia and HCl on heating — both irritant.",
+      "The product itself is chemically inert, but the dust resembles real gold leaf and has been used to defraud the unwary since the thirteenth century.",
+    ],
+    lore:
+      "Cellini, in his Treatise on Goldsmithing, sneered at it: 'the mosaic gold is a thing for the makers of book-covers and rustic altarpieces, but no goldsmith would put his name to a piece touched with it.' The painters did not mind — they were happy to have a pigment they could afford by the pound.",
+  },
+  {
+    slug: "white-lead",
+    name: "White Lead",
+    aka: ["Cerussa", "Ceruse", "Flake White", "Lead Carbonate"],
+    glyph: "♄",
+    era: "Antiquity → industrial scale 17th century",
+    origin: "The Aegean (Theophrastus); Dutch Republic (the Stack Process)",
+    discoverer: "Theophrastus describes it; the Dutch perfected it",
+    hazardLevel: 5,
+    tagline:
+      "The pure white the painters could not do without — manufactured for two thousand years by rotting lead in vinegar fumes.",
+    history:
+      "Theophrastus, in the third century BCE, describes coils of lead suspended over vinegar in sealed pots, gently warmed by dung, yielding a brilliant white crust after some weeks. The recipe scarcely changed for two thousand years; the Dutch Stack Process of the seventeenth century industrialised it, with whole sheds full of clay pots, each holding a pellet of vinegar and a coil of lead, buried in tan-bark or horse manure to keep the temperature steady. White lead was the only opaque white available to Western painters from Pompeii to the Impressionists. It was also the cosmetic Venetian women used to bleach their complexions, the powder that made the courtiers of Versailles pale, and the slow poison that killed a great many of them.",
+    reagents: [
+      { archaic: "Lead", modern: "Lead (Pb)", note: "Pure metallic lead, hammered into thin coils", materialSlug: "lead" },
+      { archaic: "Vinegar", modern: "Acetic acid (CH₃COOH)", note: "Strong wine vinegar — about 5 %", materialSlug: "vinegar" },
+      { archaic: "Tan-bark or dung", modern: "Decomposing organic matter", note: "Heat and CO₂ source — both essential" },
+    ],
+    procedure: [
+      "Hammer pure lead into long thin coils.",
+      "Set each coil in a small earthen pot with a pellet of strong vinegar beneath, not touching.",
+      "Pack the pots in a shed in layers, separated by tan-bark or fresh horse manure.",
+      "Seal the shed and leave for three months; the warmth of fermentation keeps the pots near 50 °C, and the dung gives off carbon dioxide.",
+      "Open the shed; the coils are crusted with a brittle, lustrous white scale. Knock off the white lead, melt down the unreacted metal, and begin again.",
+    ],
+    chemistry: {
+      equation:
+        "Pb + CH₃COOH + ½ O₂ + CO₂ → 2 PbCO₃·Pb(OH)₂  (basic lead carbonate)",
+      explanation:
+        "Acetic acid vapour attacks the lead surface to form lead acetate, which is then oxidised by air and carbonated by the CO₂ from the dung to give basic lead carbonate. The product is opaque, finely divided, and refracts light brilliantly — qualities every painter wanted. Modern titanium white has now displaced it, but the lustre and the way oil paints made with white lead handle have never been quite reproduced; old masters' restorers still mourn it.",
+    },
+    hazards: [
+      "Severely toxic. Chronic exposure causes anaemia, gut pain, neuropathy, and the wrist-drop palsy that was the painter's and the typesetter's occupational disease.",
+      "Cosmetic use bleached the skin and slowly killed the wearer; Elizabeth I and many of her court are thought to have died of it.",
+      "Banned for paint use in most countries by the late twentieth century; still strictly regulated.",
+    ],
+    lore:
+      "Vermeer's Girl with a Pearl Earring is built on a ground of white lead. So is the highlight in her pearl. The pigment that gave Western painting its luminous quality was also the slow poison of the painters; Caravaggio's death is suspected to have been from it, and Goya's late dark paintings have been read as the visions of a man with lead encephalopathy.",
+  },
+  {
+    slug: "berthollet-bleach",
+    name: "Berthollet's Bleaching Liquor",
+    aka: ["Eau de Javel", "Javelle Water", "Chloride of Potash"],
+    glyph: "🜂",
+    era: "1789",
+    origin: "Javel, near Paris",
+    discoverer: "Claude Louis Berthollet",
+    hazardLevel: 4,
+    tagline:
+      "A pale yellow solution that turned linen white in minutes, ending the four-thousand-year monopoly of the bleaching field.",
+    history:
+      "For all of recorded history, white linen had been made by laying wet cloth on grass and waiting weeks for the sun and the dew to bleach it. Bleaching grounds were vast — outside every Dutch and Irish weaving town there were acres of cloth spread out under the sky — and the process was the bottleneck of textile manufacturing. In 1774 Scheele isolated chlorine gas; in 1789 Berthollet, at the chemical works in Javel near Paris, passed the gas through a solution of potash and obtained a solution that bleached cotton and linen in minutes rather than weeks. Within ten years every English mill had built a bleach-house, and the textile factory of the industrial revolution became possible.",
+    reagents: [
+      { archaic: "Spirit of Salt", modern: "Hydrochloric acid (HCl)", note: "Source of chlorine when oxidised", materialSlug: "hcl" },
+      { archaic: "Black Manganese", modern: "Manganese dioxide / pyrolusite (MnO₂)", note: "Oxidiser — produces chlorine from HCl", materialSlug: "pyrolusite" },
+      { archaic: "Salt of Tartar", modern: "Potassium carbonate (potash, K₂CO₃)", note: "Absorbs the chlorine", materialSlug: "potash" },
+    ],
+    procedure: [
+      "Warm pyrolusite with hydrochloric acid in a glass retort; greenish-yellow chlorine gas evolves.",
+      "Lead the gas through a long porcelain tube into a vessel of cold potash solution.",
+      "The solution turns pale yellow as the chlorine is absorbed; continue until no more gas is taken up.",
+      "Dilute and bottle. Linen dipped in the solution, then rinsed, comes out brilliant white.",
+    ],
+    chemistry: {
+      equation:
+        "MnO₂ + 4 HCl → MnCl₂ + Cl₂↑ + 2 H₂O   ·   Cl₂ + 2 KOH → KCl + KOCl + H₂O",
+      explanation:
+        "Pyrolusite oxidises hydrochloric acid to free chlorine — this was Scheele's discovery. The chlorine, passed into alkali, disproportionates into chloride (Cl⁻) and hypochlorite (OCl⁻). The hypochlorite is the active oxidiser that breaks the conjugated double-bond systems of natural pigments, turning yellow flax fibre white. Modern household bleach is the sodium-based version of the same chemistry: NaOCl in dilute solution.",
+    },
+    hazards: [
+      "Chlorine gas is acutely toxic; the first weapon of chemical warfare in 1915.",
+      "Bleach solutions release chlorine when mixed with acids; never combine with vinegar, toilet acid, or aqua regia.",
+      "Mixing with ammonia produces chloramines — a domestic fatality every few years.",
+    ],
+    lore:
+      "Tennant in Glasgow, hearing of Berthollet's process, substituted slaked lime for the potash in 1799 — chloride of lime — and produced a dry powder that could be shipped in barrels to any mill in the country. Within a generation the bleaching fields outside every linen town had been ploughed under and forgotten. The industrial revolution in textiles has many fathers; chlorine bleach is the most invisible of them.",
+  },
+  {
+    slug: "caput-mortuum",
+    name: "Caput Mortuum",
+    aka: ["Colcothar", "Dead Head", "Cardinal Purple", "Crocus of Mars"],
+    glyph: "🜍",
+    era: "13th century onward",
+    origin: "Latin alchemy; vitriol-distilling shops of Saxony and Bohemia",
+    discoverer: "Pseudo-Geber and the vitriol distillers",
+    hazardLevel: 1,
+    tagline:
+      "The dark red oxide left at the bottom of the vitriol retort — what the alchemists called the dead head, and what painters bought as the warmest red of their palette.",
+    history:
+      "When the vitriol distillers drove off the spirit and the oil, what remained in the bottom of the retort was a heavy ochre-to-purple powder that the alchemists called caput mortuum — the dead head, the spent matter from which all life had departed. The painters, who had less occult interests, found in this residue a pigment of unrivalled permanence and a colour that ran from rich rust to deep aubergine depending on the heat at which it had been driven. Rembrandt's late portraits owe much of their warmth to it; the robes of cardinals were dyed with the same iron oxide in cloth-grade form. The phrase entered the alchemical lexicon as a metaphor for the residue of any operation — what remains when the volatile principle has fled.",
+    reagents: [
+      { archaic: "Green Vitriol", modern: "Iron(II) sulfate heptahydrate (FeSO₄·7H₂O)", materialSlug: "green-vitriol" },
+    ],
+    procedure: [
+      "Charge a retort with green vitriol; distil the oil of vitriol over many hours as in the master operation.",
+      "When no more vapour rises and the residue is dry, take down the fire.",
+      "Open the retort: the bottom is lined with a hard cake, brownish-purple where the heat was strongest, brick-red where it was less.",
+      "Crush the cake to powder and grind under water; the colour brightens with grinding.",
+      "For the deepest purple variety — the colour the cardinals favoured — calcine the powder a second time in an open vessel.",
+    ],
+    chemistry: {
+      equation:
+        "2 FeSO₄ → Fe₂O₃ + SO₂↑ + SO₃↑",
+      explanation:
+        "The same reaction that gives sulfuric acid leaves iron(III) oxide — hematite — as the non-volatile residue. The colour ranges from yellow-red (small particles) through bright vermillion to deep purple (large, well-crystallised particles), depending on the calcination temperature. The same compound under the name jeweller's rouge polishes silver and lens-grinders' optics; under the name red ochre it has coloured cave paintings since the Palaeolithic.",
+    },
+    hazards: [
+      "The pigment itself is among the most stable and least toxic substances known.",
+      "The preparation involves the vitriol distillation, which is dangerous; the residue is safe.",
+      "Inhalation of the fine powder, like any pigment dust, is best avoided.",
+    ],
+    lore:
+      "Among the alchemists the dead head was a meditation: every operation leaves a residue, every refinement a portion that cannot be made spiritual and must be left behind. The colour was so striking, and the metaphor so universal, that Jung borrowed it for his psychology: the caput mortuum is what remains in the soul after the work of integration is done — heavy, dark, and curiously beautiful.",
+  },
 ];
 
 export function getExperiment(slug: string): Experiment | undefined {

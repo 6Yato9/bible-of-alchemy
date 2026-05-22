@@ -124,9 +124,19 @@ export default async function ExperimentPage(
                     {r.archaic}
                   </td>
                   <td className="py-3 px-4 align-top">
-                    <div className="text-[color:var(--color-foreground)]">
-                      {r.modern}
-                    </div>
+                    {r.materialSlug ? (
+                      <Link
+                        href={`/materials/${r.materialSlug}`}
+                        className="group inline-flex items-baseline gap-1.5 text-[color:var(--color-foreground)] hover:text-[color:var(--color-gold-bright)] transition-colors underline decoration-[color:var(--color-border-strong)] underline-offset-4 decoration-dotted hover:decoration-[color:var(--color-gold)]"
+                      >
+                        {r.modern}
+                        <span aria-hidden className="text-[10px] text-[color:var(--color-dim)] group-hover:text-[color:var(--color-gold)] transition-colors">
+                          ↗
+                        </span>
+                      </Link>
+                    ) : (
+                      <span className="text-[color:var(--color-foreground)]">{r.modern}</span>
+                    )}
                     {r.note && (
                       <div className="mt-1 text-xs italic text-[color:var(--color-dim)]">
                         {r.note}

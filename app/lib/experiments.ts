@@ -9,7 +9,7 @@ export type Experiment = {
   hazardLevel: 1 | 2 | 3 | 4 | 5;
   tagline: string;
   history: string;
-  reagents: { archaic: string; modern: string; note?: string }[];
+  reagents: { archaic: string; modern: string; note?: string; materialSlug?: string }[];
   procedure: string[];
   chemistry: { equation?: string; explanation: string };
   hazards: string[];
@@ -31,8 +31,8 @@ export const experiments: Experiment[] = [
     history:
       "First described in the writings attributed to Jābir ibn Hayyān, the eighth-century Persian polymath revered in Europe as Geber, aqua regia was prized as the sole agent capable of dissolving gold and platinum. Latin alchemists named it the King's Water, for only the King of Metals would yield to it. In 1940, the chemist George de Hevesy used it in Copenhagen to dissolve the Nobel Prize medals of Max von Laue and James Franck, hiding them in plain sight from the occupying Reich until the war's end, when the gold was re-precipitated and the medals recast.",
     reagents: [
-      { archaic: "Spirit of Salt", modern: "Hydrochloric acid (HCl)" },
-      { archaic: "Spirit of Nitre", modern: "Nitric acid (HNO₃)" },
+      { archaic: "Spirit of Salt", modern: "Hydrochloric acid (HCl)", materialSlug: "hcl" },
+      { archaic: "Spirit of Nitre", modern: "Nitric acid (HNO₃)", materialSlug: "nitric-acid" },
       { archaic: "—", modern: "Ratio: three parts HCl to one part HNO₃ by volume" },
     ],
     procedure: [
@@ -69,9 +69,9 @@ export const experiments: Experiment[] = [
     history:
       "The earliest formula appears in the Zhenyuan miaodao yaolüe, a ninth-century Taoist text warning practitioners that a mixture of sulfur, realgar, and saltpetre boiled with honey 'has singed beards and burned down the house where it was made.' The compounders were not chemists but elixirists, hunting an alchemical longevity drug. Within two centuries the formula had entered Chinese siege manuals; by the thirteenth it had crossed the steppe, and by Roger Bacon's day it was known in Oxford. The serpentine powder of the early cannons was simply ground; corned powder — caked, dried, and broken into grains — came later, and tripled the energy of European artillery.",
     reagents: [
-      { archaic: "Saltpetre", modern: "Potassium nitrate (KNO₃)", note: "75% by mass — the oxidiser" },
-      { archaic: "Brimstone", modern: "Sulfur (S₈)", note: "10% — lowers ignition temperature" },
-      { archaic: "Charcoal", modern: "Carbon (C)", note: "15% — fuel; willow or alder traditionally" },
+      { archaic: "Saltpetre", modern: "Potassium nitrate (KNO₃)", note: "75% by mass — the oxidiser", materialSlug: "saltpetre" },
+      { archaic: "Brimstone", modern: "Sulfur (S₈)", note: "10% — lowers ignition temperature", materialSlug: "sulfur" },
+      { archaic: "Charcoal", modern: "Carbon (C)", note: "15% — fuel; willow or alder traditionally", materialSlug: "charcoal" },
     ],
     procedure: [
       "Grind each ingredient separately to a fine flour with a mortar of bronze (never iron — sparks).",
@@ -107,10 +107,10 @@ export const experiments: Experiment[] = [
     history:
       "When the Arab fleet broke against the walls of Constantinople in 678, it was repelled by a weapon the chroniclers describe with awe and no detail. Greek fire was projected from siphons mounted on the prows of dromons, and once kindled it could not be extinguished by water — indeed water seemed to feed it. The formula was guarded so closely that even Constantine VII, writing to his son, called it a secret 'shown by an angel to the great and holy first Christian emperor.' By the time the empire fell, the recipe had been lost, and it has never been reconstructed with certainty.",
     reagents: [
-      { archaic: "Naphtha", modern: "Light petroleum distillate", note: "Surface-seeped crude from the Caspian basin" },
-      { archaic: "Quicklime", modern: "Calcium oxide (CaO)", note: "Conjectural — produces heat on contact with water" },
-      { archaic: "Brimstone", modern: "Sulfur (S₈)" },
-      { archaic: "Resin / pitch", modern: "Pine tar", note: "Thickener; lets the fire cling like tar" },
+      { archaic: "Naphtha", modern: "Light petroleum distillate", note: "Surface-seeped crude from the Caspian basin", materialSlug: "naphtha" },
+      { archaic: "Quicklime", modern: "Calcium oxide (CaO)", note: "Conjectural — produces heat on contact with water", materialSlug: "quicklime" },
+      { archaic: "Brimstone", modern: "Sulfur (S₈)", materialSlug: "sulfur" },
+      { archaic: "Resin / pitch", modern: "Pine tar", note: "Thickener; lets the fire cling like tar", materialSlug: "pine-pitch" },
     ],
     procedure: [
       "Distil crude naphtha by gentle heat in a covered retort to draw off the lighter spirit.",
@@ -182,9 +182,9 @@ export const experiments: Experiment[] = [
     history:
       "Quicksilver was the most fascinating substance the ancients knew — a liquid metal, cold to the touch, that flowed from cinnabar when the red ore was roasted. Subliming it with sea salt and vitriol yielded corrosive sublimate (HgCl₂), a colourless, glittering crystal of murderous potency. The milder calomel (Hg₂Cl₂) was used as a purgative well into the nineteenth century; American president Andrew Jackson is thought to have suffered chronic mercury poisoning from his daily dose. Syphilis sufferers spent months in sweating tubs anointed with mercury, with the saying 'a night with Venus, a lifetime with Mercury.'",
     reagents: [
-      { archaic: "Quicksilver", modern: "Mercury (Hg)" },
-      { archaic: "Sea Salt", modern: "Sodium chloride (NaCl)" },
-      { archaic: "Oil of Vitriol", modern: "Sulfuric acid (H₂SO₄)" },
+      { archaic: "Quicksilver", modern: "Mercury (Hg)", materialSlug: "mercury" },
+      { archaic: "Sea Salt", modern: "Sodium chloride (NaCl)", materialSlug: "sea-salt" },
+      { archaic: "Oil of Vitriol", modern: "Sulfuric acid (H₂SO₄)", materialSlug: "sulfuric-acid" },
     ],
     procedure: [
       "Triturate equal parts mercury and sea salt in an iron mortar until the silver is dispersed into a grey powder.",
@@ -221,8 +221,8 @@ export const experiments: Experiment[] = [
       "Hennig Brand was an unsuccessful glassmaker who married into money and spent it chasing the Philosopher's Stone. Convinced that the answer lay in 'the golden stream' of human urine, he collected, evaporated, and putrefied some 5,500 litres of it over months in his Hamburg cellar. From the black residue, distilled in a fierce fire, came a white waxy substance that glowed in the dark and burst into flame in air. He had isolated white phosphorus — the first new element discovered by anyone since antiquity, and the first whose discovery date and discoverer are known. Brand kept it a secret for six years; once it leaked, he sold it for the price of gold.",
     reagents: [
       { archaic: "Stale urine", modern: "Aged human urine (~5500 L)", note: "Modern reconstructions use bone ash; the salts are the same" },
-      { archaic: "Black coals", modern: "Charcoal (reducing agent)" },
-      { archaic: "Sand", modern: "Silica (SiO₂)", note: "Acts as a flux in the retort" },
+      { archaic: "Black coals", modern: "Charcoal (reducing agent)", materialSlug: "charcoal" },
+      { archaic: "Sand", modern: "Silica (SiO₂)", note: "Acts as a flux in the retort", materialSlug: "silica" },
     ],
     procedure: [
       "Set urine in open vessels until it putrefies and turns syrupy — Brand allowed months.",
@@ -259,9 +259,9 @@ export const experiments: Experiment[] = [
     history:
       "Johann Glauber, ill with typhus and unable to keep food down, was led by Hungarian villagers to a spring whose water cured him within days. He carried home a sample, evaporated it, and crystallised the salt responsible — large, transparent, prismatic crystals that effloresced to a white powder in dry air. He named it sal mirabilis, the wonder salt, and spent the rest of his life selling it as a panacea. It was Europe's first commercially produced laxative; it remains in pharmacopoeias to this day, and its decahydrate's reversible melting (32 °C) is now used in solar heat storage.",
     reagents: [
-      { archaic: "Spirit of Salt", modern: "Hydrochloric acid (HCl)" },
-      { archaic: "Sea Salt", modern: "Sodium chloride (NaCl)" },
-      { archaic: "Oil of Vitriol", modern: "Sulfuric acid (H₂SO₄)" },
+      { archaic: "Spirit of Salt", modern: "Hydrochloric acid (HCl)", materialSlug: "hcl" },
+      { archaic: "Sea Salt", modern: "Sodium chloride (NaCl)", materialSlug: "sea-salt" },
+      { archaic: "Oil of Vitriol", modern: "Sulfuric acid (H₂SO₄)", materialSlug: "sulfuric-acid" },
     ],
     procedure: [
       "Combine common salt and oil of vitriol in a glass retort.",
@@ -296,9 +296,9 @@ export const experiments: Experiment[] = [
     history:
       "When ammonia (then known as spirit of hartshorn) is poured into a solution of gold dissolved in aqua regia, a heavy, ochre-coloured precipitate falls. Dried, it is one of the most touch-sensitive primary explosives known. The seventeenth-century alchemists, baffled and delighted, called it aurum fulminans — fulminating gold. Samuel Pepys recorded watching a demonstration in his diary for 1663, and Robert Boyle warned that 'a very small grayne of it' could ruin a glass vessel and the hand holding it. Its structure was an open mystery until 2007, when X-ray crystallography revealed a polymeric network of Au–N–Au bonds.",
     reagents: [
-      { archaic: "Aqua Regia", modern: "Royal water (3 HCl : 1 HNO₃)" },
-      { archaic: "Gold leaf", modern: "Pure gold (Au)" },
-      { archaic: "Spirit of Hartshorn", modern: "Aqueous ammonia (NH₃·H₂O)" },
+      { archaic: "Aqua Regia", modern: "Royal water (3 HCl : 1 HNO₃)", materialSlug: "aqua-regia" },
+      { archaic: "Gold leaf", modern: "Pure gold (Au)", materialSlug: "gold" },
+      { archaic: "Spirit of Hartshorn", modern: "Aqueous ammonia (NH₃·H₂O)", materialSlug: "aqueous-ammonia" },
     ],
     procedure: [
       "DO NOT attempt this. It is described here as a matter of history.",
@@ -335,7 +335,7 @@ export const experiments: Experiment[] = [
     history:
       "Distillation of wine to concentrate its spirit is described in the Mappae clavicula and in the works of the Salernitan school in the twelfth century, though the technique probably reached Europe through Arabic medicine somewhat earlier. Taddeo Alderotti, working in thirteenth-century Bologna, refined the still by adding a serpentine cooling coil — the worm — and obtained spirit at strength near 90 % alcohol, which he called aqua ardens. The substance was reckoned a panacea: it preserved meats, dissolved resins, eased pain, and burned with a clean blue flame that promised some inner fire of life. The Gaelic uisce beatha and French eau-de-vie are literal translations of the alchemists' Latin.",
     reagents: [
-      { archaic: "Strong wine", modern: "Fermented wine (~12 % ethanol)" },
+      { archaic: "Strong wine", modern: "Fermented wine (~12 % ethanol)", materialSlug: "wine" },
       { archaic: "—", modern: "Vessel: alembic with serpentine condenser" },
     ],
     procedure: [
@@ -371,10 +371,10 @@ export const experiments: Experiment[] = [
     history:
       "Diesbach, a Berlin dyemaker, was trying to extend a batch of red cochineal lake with potash. The potash he bought from his colleague Dippel was contaminated with animal oil — Dippel had been distilling 'animal oil' (a foul tar of bone) in the same vessel. When Diesbach added the contaminated potash to his iron sulfate mordant, the lake came out not red but a deep, brilliant blue. He had accidentally synthesised iron(III) hexacyanoferrate(II), the first chemically stable, water-fast, lightfast blue pigment available cheaply in Europe. Within twenty years it had replaced ultramarine for all but the most reverent uses, and Hokusai's Great Wave is painted with it.",
     reagents: [
-      { archaic: "Pot ashes", modern: "Potassium carbonate (K₂CO₃)" },
+      { archaic: "Pot ashes", modern: "Potassium carbonate (K₂CO₃)", materialSlug: "potash" },
       { archaic: "Bullock's blood / horn / hide", modern: "Nitrogen source (proteins → cyanide on calcination)" },
-      { archaic: "Vitriol of Mars", modern: "Iron(II) sulfate (FeSO₄)" },
-      { archaic: "Alum", modern: "Potassium aluminium sulfate (mordant)" },
+      { archaic: "Vitriol of Mars", modern: "Iron(II) sulfate (FeSO₄)", materialSlug: "green-vitriol" },
+      { archaic: "Alum", modern: "Potassium aluminium sulfate (mordant)", materialSlug: "alum" },
     ],
     procedure: [
       "Calcine pot ashes with dried bullock's blood at red heat until the mass fuses.",
@@ -411,7 +411,7 @@ export const experiments: Experiment[] = [
     history:
       "The Latin alchemical corpus called the Pseudo-Geber, written under Geber's name in the late thirteenth century, gives the first clear description of preparing oil of vitriol by destructive distillation of green vitriol — iron(II) sulfate heptahydrate. The product was prized as a powerful solvent; alchemical literature has it dissolving 'all the imperfect metals.' The acronym VITRIOL — Visita Interiora Terrae Rectificando Invenies Occultum Lapidem ('Visit the Interior of the Earth and by Rectifying you will find the Hidden Stone') — became one of the most-quoted mottos of the art. By the eighteenth century the substance had moved from the alchemist's bench to the bleach-house and the saltpetre works, and by the twentieth its production was used as a proxy for a nation's industrial output.",
     reagents: [
-      { archaic: "Green Vitriol", modern: "Iron(II) sulfate heptahydrate (FeSO₄·7H₂O)" },
+      { archaic: "Green Vitriol", modern: "Iron(II) sulfate heptahydrate (FeSO₄·7H₂O)", materialSlug: "green-vitriol" },
       { archaic: "—", modern: "Vessel: glazed earthenware retort" },
     ],
     procedure: [
@@ -479,4 +479,11 @@ export function getExperiment(slug: string): Experiment | undefined {
 
 export function getAllSlugs(): string[] {
   return experiments.map((e) => e.slug);
+}
+
+/** All experiments that reference the given material slug as a reagent. */
+export function experimentsUsing(materialSlug: string): Experiment[] {
+  return experiments.filter((e) =>
+    e.reagents.some((r) => r.materialSlug === materialSlug),
+  );
 }

@@ -49,6 +49,12 @@ export default function RootLayout({
                 Codex
               </Link>
               <Link
+                href="/materials"
+                className="smallcaps text-[color:var(--color-muted)] hover:text-[color:var(--color-gold-bright)] transition-colors"
+              >
+                Materia
+              </Link>
+              <Link
                 href="/about"
                 className="smallcaps text-[color:var(--color-muted)] hover:text-[color:var(--color-gold-bright)] transition-colors"
               >

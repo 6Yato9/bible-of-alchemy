@@ -16,7 +16,35 @@ export type Experiment = {
   lore: string;
 };
 
-export const experiments: Experiment[] = [
+/**
+ * Canonical discovery year for each entry, used to order the codex chronologically.
+ * Negative numbers are BCE; for traditions that span centuries we record the
+ * earliest reasonably attributed date.
+ */
+const DISCOVERY_YEAR: Record<string, number> = {
+  "white-lead": -300,          // Theophrastus
+  "sal-ammoniac": 50,          // Pliny, refined 9th c
+  "philosophers-stone": 300,   // Zosimos of Panopolis
+  "greek-fire": 672,           // Kallinikos at Constantinople
+  "mercury-sublimation": 750,  // Arabic alchemy
+  "aqua-regia": 800,           // Jābir ibn Hayyān
+  "vermillion": 800,           // Jābir's synthetic route
+  "black-powder": 850,         // Tang-dynasty alchemists
+  "aqua-vitae": 1150,          // Salernitan school
+  "mosaic-gold": 1250,         // Pseudo-Geber
+  "oil-of-vitriol": 1300,      // Pseudo-Geber
+  "caput-mortuum": 1300,       // by-product of the same trade
+  "liquor-of-hartshorn": 1400, // medieval European pharmacy
+  "sweet-oil-of-vitriol": 1540, // Valerius Cordus
+  "fulminating-gold": 1585,    // Sebald Schwaerzer
+  "bologna-stone": 1603,       // Vincenzo Casciarolo
+  "glaubers-salt": 1625,       // Johann Glauber
+  "phosphorus-discovery": 1669, // Hennig Brand
+  "prussian-blue": 1706,       // Diesbach
+  "berthollet-bleach": 1789,   // Berthollet at Javel
+};
+
+const experimentsData: Experiment[] = [
   {
     slug: "aqua-regia",
     name: "Aqua Regia",
@@ -776,8 +804,18 @@ export const experiments: Experiment[] = [
   },
 ];
 
+/** Codex entries, ordered by date of discovery (earliest first). */
+export const experiments: Experiment[] = [...experimentsData].sort(
+  (a, b) => (DISCOVERY_YEAR[a.slug] ?? 0) - (DISCOVERY_YEAR[b.slug] ?? 0),
+);
+
 export function getExperiment(slug: string): Experiment | undefined {
   return experiments.find((e) => e.slug === slug);
+}
+
+/** Look up the canonical discovery year for an experiment. */
+export function discoveryYearOf(slug: string): number | undefined {
+  return DISCOVERY_YEAR[slug];
 }
 
 export function getAllSlugs(): string[] {

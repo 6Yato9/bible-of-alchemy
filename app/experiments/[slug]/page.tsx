@@ -209,6 +209,66 @@ export default async function ExperimentPage(
         </p>
       </Section>
 
+      {/* V. In the Manuscripts & in Print */}
+      {e.sources && e.sources.length > 0 && (
+        <Section roman="V" title="In the Manuscripts & in Print">
+          <ul className="space-y-5">
+            {e.sources.map((s, i) => (
+              <li key={i} className="flex gap-5">
+                <span
+                  className={`mt-1 shrink-0 w-20 text-right font-display text-[10px] tracking-[0.24em] uppercase ${
+                    s.kind === "patent"
+                      ? "text-[color:var(--color-copper)]"
+                      : s.kind === "manuscript"
+                      ? "text-[color:var(--color-gold-bright)]"
+                      : s.kind === "paper"
+                      ? "text-[color:var(--color-vitriol)]"
+                      : "text-[color:var(--color-gold)]"
+                  }`}
+                  title={kindLabel(s.kind)}
+                >
+                  {kindLabel(s.kind)}
+                </span>
+                <div className="flex-1 border-l border-[color:var(--color-border)] pl-5">
+                  <div className="text-[color:var(--color-foreground)] italic leading-snug">
+                    {s.url ? (
+                      <a
+                        href={s.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-[color:var(--color-gold-bright)] transition-colors underline decoration-[color:var(--color-border-strong)] underline-offset-4 decoration-dotted hover:decoration-[color:var(--color-gold)]"
+                      >
+                        {s.title}
+                      </a>
+                    ) : (
+                      s.title
+                    )}
+                  </div>
+                  <div className="mt-1 text-sm text-[color:var(--color-muted)]">
+                    {[s.author, s.year].filter(Boolean).join(" · ")}
+                  </div>
+                  {s.cite && (
+                    <div className="mt-1 text-xs font-mono text-[color:var(--color-dim)]">
+                      {s.cite}
+                    </div>
+                  )}
+                  {s.holding && (
+                    <div className="mt-1 text-xs text-[color:var(--color-dim)]">
+                      Held at: {s.holding}
+                    </div>
+                  )}
+                  {s.note && (
+                    <div className="mt-2 text-sm italic text-[color:var(--color-dim)] leading-relaxed">
+                      {s.note}
+                    </div>
+                  )}
+                </div>
+              </li>
+            ))}
+          </ul>
+        </Section>
+      )}
+
       <div className="my-14 rule-thick" />
 
       {/* Prev / next */}
@@ -295,6 +355,15 @@ function Meta({
       </div>
     </div>
   );
+}
+
+function kindLabel(kind: "paper" | "patent" | "book" | "manuscript"): string {
+  switch (kind) {
+    case "paper": return "Paper";
+    case "patent": return "Patent";
+    case "book": return "Treatise";
+    case "manuscript": return "MS.";
+  }
 }
 
 function romanize(n: number): string {

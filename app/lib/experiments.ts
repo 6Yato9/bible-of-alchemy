@@ -1,3 +1,19 @@
+export type SourceKind = "paper" | "patent" | "book" | "manuscript";
+
+export type Source = {
+  kind: SourceKind;
+  title: string;
+  author?: string;
+  year?: string;
+  /** Journal citation, patent number, manuscript shelf-mark, etc. */
+  cite?: string;
+  /** Institution holding the original. */
+  holding?: string;
+  /** Link to a digitized facsimile or transcription, if one exists. */
+  url?: string;
+  note?: string;
+};
+
 export type Experiment = {
   slug: string;
   name: string;
@@ -14,6 +30,8 @@ export type Experiment = {
   chemistry: { equation?: string; explanation: string };
   hazards: string[];
   lore: string;
+  /** Papers, patents, books, and manuscripts that document the procedure. */
+  sources?: Source[];
 };
 
 /**
@@ -42,6 +60,14 @@ const DISCOVERY_YEAR: Record<string, number> = {
   "phosphorus-discovery": 1669, // Hennig Brand
   "prussian-blue": 1706,       // Diesbach
   "berthollet-bleach": 1789,   // Berthollet at Javel
+  "voltaic-pile": 1800,        // Volta to the Royal Society
+  "woehler-urea": 1828,        // Wöhler kills vitalism
+  "synthetic-ultramarine": 1828, // Guimet wins the prize
+  "marsh-test": 1836,          // James Marsh's arsenic detector
+  "nitroglycerin": 1847,       // Sobrero, later Nobel's dynamite
+  "mauveine": 1856,            // Perkin's purple
+  "aspirin": 1897,             // Hoffmann at Bayer
+  "haber-process": 1909,       // Haber & Bosch
 };
 
 const experimentsData: Experiment[] = [
@@ -82,6 +108,23 @@ const experimentsData: Experiment[] = [
     ],
     lore:
       "In medieval cosmology the metals were ruled by the planets, and gold was the metal of the Sun — incorruptible, perfect, royal. That a mere mixture of two lesser acids could dissolve the Sun was, to the alchemists, a hint that the prima materia underlying all matter could be reached if only the right solvents were found.",
+    sources: [
+      {
+        kind: "book",
+        author: "Pseudo-Geber",
+        title: "Summa Perfectionis Magisterii",
+        year: "c. 1310",
+        note: "The Latin alchemical corpus written under Jābir's name; gives the first European recipe for the royal water.",
+      },
+      {
+        kind: "manuscript",
+        author: "Jābir ibn Hayyān (attributed)",
+        title: "Kitāb al-Sabʿīn (The Seventy Books)",
+        year: "8th–10th century",
+        holding: "Bibliothèque nationale de France, Paris (Arabe MSS)",
+        note: "The earliest descriptions of royal water and of dissolving gold.",
+      },
+    ],
   },
   {
     slug: "black-powder",
@@ -120,6 +163,31 @@ const experimentsData: Experiment[] = [
     ],
     lore:
       "The Chinese name huǒ yào means literally fire medicine — a relic of the recipe's origin as an elixir of life. Its first European mention is in the Liber Ignium of Marcus Graecus, a thirteenth-century manuscript of recipes for incendiaries, where it sits beside formulas for Greek fire and a salve for arrow wounds.",
+    sources: [
+      {
+        kind: "book",
+        author: "Zhenyuan miaodao yaolüe (anonymous Taoist)",
+        title: "Classified Essentials of the Mysterious Tao of the True Origin of Things",
+        year: "9th century",
+        note: "The earliest written warning that the mixture 'has singed beards and burned down the house where it was made.'",
+      },
+      {
+        kind: "manuscript",
+        author: "Marcus Graecus",
+        title: "Liber Ignium ad Comburendos Hostes",
+        year: "c. 1280",
+        holding: "BnF, Paris — MS Lat. 7156 and others",
+        url: "https://gallica.bnf.fr/ark:/12148/btv1b9067737p",
+        note: "The first European recipe; sits beside formulas for Greek fire.",
+      },
+      {
+        kind: "book",
+        author: "Roger Bacon",
+        title: "Epistola de Secretis Operibus Artis et Naturae",
+        year: "1267",
+        note: "Bacon's anagram concealing the proportions of the powder — the earliest English mention.",
+      },
+    ],
   },
   {
     slug: "greek-fire",
@@ -157,6 +225,31 @@ const experimentsData: Experiment[] = [
     ],
     lore:
       "The Byzantines protected the formula with capital penalties; the family of Kallinikos held the trade for generations. When the Crusaders sacked Constantinople in 1204, the secret died with the engineers who knew it — proof that knowledge, like gold, can be lost more easily than it can be made.",
+    sources: [
+      {
+        kind: "book",
+        author: "Theophanes the Confessor",
+        title: "Chronographia",
+        year: "c. 815",
+        note: "The earliest surviving account of the weapon's use against the Arab fleet at Constantinople in 678.",
+      },
+      {
+        kind: "book",
+        author: "Constantine VII Porphyrogenitus",
+        title: "De Administrando Imperio",
+        year: "c. 952",
+        note: "The emperor's letter to his son warning that the formula was 'shown by an angel to the great and holy first Christian emperor.'",
+      },
+      {
+        kind: "manuscript",
+        author: "Marcus Graecus",
+        title: "Liber Ignium ad Comburendos Hostes",
+        year: "c. 1280",
+        holding: "BnF, Paris — MS Lat. 7156",
+        url: "https://gallica.bnf.fr/ark:/12148/btv1b9067737p",
+        note: "Western reconstruction of the recipe — probably not the genuine Byzantine formula.",
+      },
+    ],
   },
   {
     slug: "philosophers-stone",
@@ -195,6 +288,43 @@ const experimentsData: Experiment[] = [
     ],
     lore:
       "Carl Jung, late in life, read the alchemists not as failed chemists but as accidental psychologists: the Great Work was the soul's transformation projected onto matter. Whether or not he was right, no body of failed science has ever produced a richer literature, nor seeded so many of the techniques — distillation, crystallisation, sublimation — that real chemistry would inherit.",
+    sources: [
+      {
+        kind: "manuscript",
+        author: "Zosimos of Panopolis (fragments)",
+        title: "Cheirokmeta (Of Things Made by Hand)",
+        year: "c. 300 CE",
+        holding: "Marciana Library, Venice — Gr. 299; and Bibliothèque nationale de France",
+        note: "The oldest surviving Greek-Egyptian alchemical texts; only fragments and visions remain.",
+      },
+      {
+        kind: "manuscript",
+        author: "Anonymous (illuminator unknown)",
+        title: "Splendor Solis",
+        year: "1532–1535",
+        holding: "British Library, London — Harley MS 3469",
+        url: "https://www.bl.uk/manuscripts/Viewer.aspx?ref=harley_ms_3469",
+        note: "Twenty-two luminous watercolour plates depicting every stage of the Great Work.",
+      },
+      {
+        kind: "manuscript",
+        author: "Isaac Newton",
+        title: "Alchemical Notebooks and Papers (Keynes & Babson collections)",
+        year: "c. 1668–1696",
+        holding: "King's College Cambridge, Hebrew University Jerusalem, Indiana University",
+        url: "https://chymistry.org/",
+        note: "Over a million words in Newton's own hand on the Great Work; suppressed by the Royal Society until 1936.",
+      },
+      {
+        kind: "manuscript",
+        author: "Anonymous",
+        title: "Aurora Consurgens",
+        year: "c. 1420",
+        holding: "Zentralbibliothek Zürich — Ms. Rh. 172",
+        url: "https://www.e-codices.unifr.ch/en/list/one/zbz/Rh0172",
+        note: "Thirty-seven illuminated plates, attributed in legend to Thomas Aquinas.",
+      },
+    ],
   },
   {
     slug: "mercury-sublimation",
@@ -233,6 +363,23 @@ const experimentsData: Experiment[] = [
     ],
     lore:
       "Mercury was the alchemists' messenger — never one thing or another, neither solid nor truly liquid, neither metal nor mineral. Its god, Hermes, gave the art its name: Hermetic. To work with mercury was to bargain with the part of nature that refused to keep still.",
+    sources: [
+      {
+        kind: "book",
+        author: "Pseudo-Geber",
+        title: "Summa Perfectionis Magisterii",
+        year: "c. 1310",
+        note: "Detailed account of mercury sublimation and the preparation of corrosive sublimate.",
+      },
+      {
+        kind: "book",
+        author: "Vannoccio Biringuccio",
+        title: "De la Pirotechnia",
+        year: "1540",
+        url: "https://www.loc.gov/item/04036330/",
+        note: "Renaissance metallurgical handbook with woodcut diagrams of the aludel and the mercury furnace at Almadén.",
+      },
+    ],
   },
   {
     slug: "phosphorus-discovery",
@@ -272,6 +419,23 @@ const experimentsData: Experiment[] = [
     ],
     lore:
       "Joseph Wright of Derby painted Brand's discovery in 1771 — The Alchymist in Search of the Philosophers Stone — depicting an old man kneeling before a glowing flask in a darkened room. It is the only contemporary painting of a real chemical discovery, and arguably the founding image of modern science.",
+    sources: [
+      {
+        kind: "paper",
+        author: "Robert Boyle",
+        title: "The Aerial Noctiluca: or some New Phænomena, and a Process of a Factitious Self-shining Substance",
+        year: "1680",
+        cite: "Royal Society of London — published as a small book; also Phil. Trans. R. Soc. 14",
+        note: "Boyle's reconstruction of Brand's process, the first widely published recipe for phosphorus.",
+      },
+      {
+        kind: "book",
+        author: "Robert Boyle",
+        title: "The Icy Noctiluca",
+        year: "1681",
+        note: "Companion volume on the solid form of phosphorus and its self-luminescence.",
+      },
+    ],
   },
   {
     slug: "glaubers-salt",
@@ -309,6 +473,23 @@ const experimentsData: Experiment[] = [
     ],
     lore:
       "Glauber may be the first chemical entrepreneur in the modern sense: he wrote his books in German rather than Latin, sold his apparatus by mail, and openly published his methods on the principle that 'a hidden art is no art.' Liebig called him the German Paracelsus; in his lifetime he was both celebrated and accused of witchcraft.",
+    sources: [
+      {
+        kind: "book",
+        author: "Johann Rudolf Glauber",
+        title: "Furni Novi Philosophici (The New Philosophical Furnaces)",
+        year: "1646–1649",
+        url: "https://archive.org/details/furninoviphilos00glau",
+        note: "Five-part treatise on apparatus and processes; the sal mirabilis is in Part III.",
+      },
+      {
+        kind: "book",
+        author: "Johann Rudolf Glauber",
+        title: "Pharmacopoeia Spagyrica",
+        year: "1654",
+        note: "The medical applications of the wonder salt.",
+      },
+    ],
   },
   {
     slug: "fulminating-gold",
@@ -348,6 +529,32 @@ const experimentsData: Experiment[] = [
     ],
     lore:
       "Aurum fulminans was one of the seventeenth century's chief arguments against the alchemical doctrine of metallic essences: how could gold, the perfect metal, be made to fly apart in violence? The puzzle nudged Boyle toward his Sceptical Chymist of 1661, the book that began the dismantling of alchemical theory.",
+    sources: [
+      {
+        kind: "book",
+        author: "Sebald Schwaerzer",
+        title: "Chrysopoeia Schwaertzeriana",
+        year: "1585",
+        note: "The earliest published recipe for fulminating gold.",
+      },
+      {
+        kind: "book",
+        author: "Basil Valentine (pseudonym)",
+        title: "Triumphwagen Antimonii (The Triumphal Chariot of Antimony)",
+        year: "1604",
+        url: "https://archive.org/details/triumphalchariot00basi",
+        note: "Most-cited Renaissance description of the preparation and the explosion.",
+      },
+      {
+        kind: "paper",
+        author: "W. Steinhauser, T. M. Klapötke et al.",
+        title: "Solving a 400-year-old mystery: the structure of fulminating gold",
+        year: "2007",
+        cite: "Angewandte Chemie International Edition, 46, 1731–1733",
+        url: "https://onlinelibrary.wiley.com/doi/10.1002/anie.200604166",
+        note: "X-ray crystal structure of the polymeric Au–N network, finally explaining the sensitivity.",
+      },
+    ],
   },
   {
     slug: "aqua-vitae",
@@ -384,6 +591,30 @@ const experimentsData: Experiment[] = [
     ],
     lore:
       "Arnaldus of Villanova called it 'the water of immortality.' Ramon Llull declared it 'an element newly revealed to men but hid from antiquity, because the human race was then too young to need this beverage destined to revive the energies of modern decrepitude.' The alchemists, for once, were not exaggerating: the still gave the world a new family of substances, and the modern chemist's first task — separating one volatile from another — was their inheritance.",
+    sources: [
+      {
+        kind: "manuscript",
+        author: "Anonymous (Salernitan school)",
+        title: "Mappae Clavicula (Little Key to Painting)",
+        year: "12th century",
+        holding: "Corning Museum of Glass, NY — MS 5; and others",
+        note: "The earliest Latin recipe for distillation of wine.",
+      },
+      {
+        kind: "book",
+        author: "Taddeo Alderotti",
+        title: "Consilia Medicinalia",
+        year: "13th century",
+        note: "Introduces the serpentine cooling coil; raises spirit strength to ~90 %.",
+      },
+      {
+        kind: "book",
+        author: "Arnaldus de Villa Nova",
+        title: "Tractatus de Vinis",
+        year: "c. 1310",
+        note: "The classic medieval treatise on the medicinal virtues of distilled wine.",
+      },
+    ],
   },
   {
     slug: "prussian-blue",
@@ -424,6 +655,25 @@ const experimentsData: Experiment[] = [
     ],
     lore:
       "It is the blue of Hokusai's wave, of Picasso's blue period, of every cyanotype blueprint, and of the uniforms of the Prussian army that gave it its name. Dippel, the man whose contaminated potash made it possible, was the alchemist who lived in Castle Frankenstein outside Darmstadt — and some scholars argue he is the original of Mary Shelley's doctor.",
+    sources: [
+      {
+        kind: "paper",
+        author: "Anonymous (Johann Leonhard Frisch)",
+        title: "Notitia Coerulei Berolinensis nuper inventi",
+        year: "1710",
+        cite: "Miscellanea Berolinensia ad Incrementum Scientiarum, vol. 1, 377–378",
+        note: "The first published notice of Diesbach's accidental synthesis, in the new Berlin Academy's journal.",
+      },
+      {
+        kind: "paper",
+        author: "John Woodward",
+        title: "Praeparatio caerulei Prussiaci ex Germania missa",
+        year: "1724",
+        cite: "Philosophical Transactions of the Royal Society, 33, 15–17",
+        url: "https://royalsocietypublishing.org/doi/10.1098/rstl.1724.0005",
+        note: "The recipe smuggled to the Royal Society from a German correspondent.",
+      },
+    ],
   },
   {
     slug: "oil-of-vitriol",
@@ -461,6 +711,23 @@ const experimentsData: Experiment[] = [
     ],
     lore:
       "The motto VITRIOL hangs in masonic lodges as a meditation: the stone you seek lies in your own depths. Whatever you make of the symbolism, the chemistry is sound — the alchemists really did find, by visiting the interior of a green crystal, a substance that would underwrite the modern world.",
+    sources: [
+      {
+        kind: "book",
+        author: "Pseudo-Geber",
+        title: "Summa Perfectionis Magisterii",
+        year: "c. 1310",
+        note: "First Latin account of the destructive distillation of green vitriol.",
+      },
+      {
+        kind: "book",
+        author: "Johann Rudolf Glauber",
+        title: "Furni Novi Philosophici",
+        year: "1646–49",
+        url: "https://archive.org/details/furninoviphilos00glau",
+        note: "Glauber's furnace design for industrial-scale production.",
+      },
+    ],
   },
   {
     slug: "liquor-of-hartshorn",
@@ -498,6 +765,17 @@ const experimentsData: Experiment[] = [
     ],
     lore:
       "The Victorian smelling salt was a slug of solid ammonium carbonate carried in a small bottle; a sniff revived the swooning by a sharp reflex inhalation. The same compound, in the kitchen, is the leavening agent in nineteenth-century Scandinavian biscuits — when you bite a hartshorn cookie, you are tasting an alchemical preparation that has been continuously made since the 1400s.",
+    sources: [
+      {
+        kind: "paper",
+        author: "Joseph Priestley",
+        title: "Observations on Different Kinds of Air",
+        year: "1774",
+        cite: "Philosophical Transactions of the Royal Society, 64, 90–95",
+        url: "https://royalsocietypublishing.org/doi/10.1098/rstl.1774.0011",
+        note: "The first isolation of ammonia as a free gas.",
+      },
+    ],
   },
   {
     slug: "sweet-oil-of-vitriol",
@@ -535,6 +813,24 @@ const experimentsData: Experiment[] = [
     ],
     lore:
       "When the news of Morton's demonstration reached London, the surgeon Robert Liston — famous for amputating a leg in two and a half minutes, and once, in haste, three of his assistant's fingers — used ether on a patient and afterwards said: 'This Yankee dodge, gentlemen, beats mesmerism hollow.' The age of conscious surgery, with its restraints and its howling, ended that week.",
+    sources: [
+      {
+        kind: "book",
+        author: "Valerius Cordus",
+        title: "De Artificiosis Extractionibus",
+        year: "1561",
+        note: "Published twenty years after Cordus's death; the first written description of distilling sulfuric acid with spirit of wine.",
+      },
+      {
+        kind: "patent",
+        author: "William T. G. Morton",
+        title: "Improvement in Surgical Operations (Letheon)",
+        year: "1846",
+        cite: "US Patent 4,848 of 12 November 1846",
+        url: "https://patents.google.com/patent/US4848",
+        note: "Morton's attempt to keep the anaesthetic secret by patenting; the medical profession refused to honour it.",
+      },
+    ],
   },
   {
     slug: "vermillion",
@@ -572,6 +868,23 @@ const experimentsData: Experiment[] = [
     ],
     lore:
       "Cennini called the synthetic kind 'made by alchemy in the retort' and warned painters not to trust the source: 'the longer it is kept on the stone with water, the more perfect it becomes. But beware of those who sell it pure, for I have known some to dilute it with brick-dust.'",
+    sources: [
+      {
+        kind: "book",
+        author: "Theophilus Presbyter",
+        title: "De Diversis Artibus (Schedula Diversarum Artium)",
+        year: "12th century",
+        note: "Twelfth-century recipe book for monastic illuminators; gives the dry-process route.",
+      },
+      {
+        kind: "book",
+        author: "Cennino Cennini",
+        title: "Il Libro dell'Arte (The Craftsman's Handbook)",
+        year: "c. 1390",
+        url: "https://archive.org/details/craftsmanshandbo00cenn",
+        note: "Painter's handbook with chapters on grinding and tempering vermillion.",
+      },
+    ],
   },
   {
     slug: "bologna-stone",
@@ -610,6 +923,24 @@ const experimentsData: Experiment[] = [
     ],
     lore:
       "Galileo, examining a stone sent to him by a Bolognese friend, wrote: 'It receives the light, swallows it, and renders it again after some hours, as though it were a sponge for the Sun.' The metaphor — lapis solaris, the solar sponge — stuck. Every glowing watch dial and exit sign on earth is a great-grandchild of the Bologna stone.",
+    sources: [
+      {
+        kind: "book",
+        author: "Fortunio Liceti",
+        title: "Litheosphorus, Sive De Lapide Bononiensi",
+        year: "1640",
+        url: "https://archive.org/details/bub_gb_PqJEHzC0WIcC",
+        note: "The first monograph devoted entirely to the Bologna Stone.",
+      },
+      {
+        kind: "book",
+        author: "Athanasius Kircher",
+        title: "Ars Magna Lucis et Umbrae",
+        year: "1646",
+        url: "https://archive.org/details/bub_gb_0pSltQyUSQYC",
+        note: "Long chapter on phosphorescence with engravings of the calcined stone.",
+      },
+    ],
   },
   {
     slug: "sal-ammoniac",
@@ -726,6 +1057,30 @@ const experimentsData: Experiment[] = [
     ],
     lore:
       "Vermeer's Girl with a Pearl Earring is built on a ground of white lead. So is the highlight in her pearl. The pigment that gave Western painting its luminous quality was also the slow poison of the painters; Caravaggio's death is suspected to have been from it, and Goya's late dark paintings have been read as the visions of a man with lead encephalopathy.",
+    sources: [
+      {
+        kind: "book",
+        author: "Theophrastus",
+        title: "Peri Lithōn (On Stones)",
+        year: "c. 315 BCE",
+        note: "The earliest written recipe for white lead by the action of vinegar fumes on lead coils.",
+      },
+      {
+        kind: "book",
+        author: "Pliny the Elder",
+        title: "Naturalis Historia, Book XXXIV",
+        year: "c. 77 CE",
+        url: "https://www.loebclassics.com/view/LCL419/1962/pb_LCL419.225.xml",
+        note: "Pliny on cerussa, its preparation, and its cosmetic use.",
+      },
+      {
+        kind: "book",
+        author: "Vitruvius",
+        title: "De Architectura, Book VII",
+        year: "c. 15 BCE",
+        note: "Cosmetic and pigment use of lead white in Roman wall painting.",
+      },
+    ],
   },
   {
     slug: "berthollet-bleach",
@@ -764,6 +1119,33 @@ const experimentsData: Experiment[] = [
     ],
     lore:
       "Tennant in Glasgow, hearing of Berthollet's process, substituted slaked lime for the potash in 1799 — chloride of lime — and produced a dry powder that could be shipped in barrels to any mill in the country. Within a generation the bleaching fields outside every linen town had been ploughed under and forgotten. The industrial revolution in textiles has many fathers; chlorine bleach is the most invisible of them.",
+    sources: [
+      {
+        kind: "paper",
+        author: "Carl Wilhelm Scheele",
+        title: "Om Brunsten eller Magnesia, och dess Egenskaper (On Manganese)",
+        year: "1774",
+        cite: "Kungliga Vetenskapsakademiens Handlingar, 35, 89–116, 177–194",
+        note: "The paper in which chlorine gas was first prepared, by heating HCl with pyrolusite.",
+      },
+      {
+        kind: "paper",
+        author: "Claude Louis Berthollet",
+        title: "Description du blanchiment des toiles et des fils par l'acide muriatique oxygéné",
+        year: "1789",
+        cite: "Annales de Chimie, 2, 151–190",
+        url: "https://gallica.bnf.fr/ark:/12148/bpt6k1077v",
+        note: "Berthollet's process as published from the Académie des Sciences.",
+      },
+      {
+        kind: "patent",
+        author: "Charles Tennant",
+        title: "Bleaching Liquor and Dry Bleaching Powder",
+        year: "1798",
+        cite: "British Patent No. 2,209 of 23 January 1798",
+        note: "Substituted slaked lime for potash and gave the world a dry, shippable bleaching powder.",
+      },
+    ],
   },
   {
     slug: "caput-mortuum",
@@ -801,6 +1183,438 @@ const experimentsData: Experiment[] = [
     ],
     lore:
       "Among the alchemists the dead head was a meditation: every operation leaves a residue, every refinement a portion that cannot be made spiritual and must be left behind. The colour was so striking, and the metaphor so universal, that Jung borrowed it for his psychology: the caput mortuum is what remains in the soul after the work of integration is done — heavy, dark, and curiously beautiful.",
+  },
+  {
+    slug: "voltaic-pile",
+    name: "The Voltaic Pile",
+    aka: ["Volta's Column", "Pila Voltaica", "The Electric Battery"],
+    glyph: "⚡",
+    era: "1800",
+    origin: "Como, Lombardy",
+    discoverer: "Alessandro Volta",
+    hazardLevel: 2,
+    tagline:
+      "A stack of silver and zinc discs interleaved with brine-soaked cloth, giving for the first time a steady electric current — the device that turned electricity from a curiosity into a tool.",
+    history:
+      "Volta and his rival Luigi Galvani had argued for a decade about Galvani's frog legs. Galvani held that the twitching came from an 'animal electricity' inside the muscle; Volta held that two different metals in contact with a moist conductor generated the current, and the muscle was merely the detector. To prove the point Volta stacked discs of silver (or copper) and zinc, separated by cardboard rounds soaked in brine, and from the top and bottom of the pile drew a current that would light a wire to red heat and decompose water into hydrogen and oxygen. He wrote up the discovery in a letter to Sir Joseph Banks at the Royal Society of London in March 1800. Within six weeks Nicholson and Carlisle in London had used a pile to electrolyse water; within months Humphry Davy was isolating sodium and potassium by passing pile current through their molten salts. Every battery on earth is a descendant.",
+    reagents: [
+      { archaic: "Silver / Copper discs", modern: "Cathode metal — Ag or Cu", note: "About the size of a large coin" },
+      { archaic: "Zinc discs", modern: "Anode metal — Zn", materialSlug: "zinc" },
+      { archaic: "Brine-soaked card", modern: "NaCl(aq) electrolyte on absorbent paste", materialSlug: "sea-salt" },
+    ],
+    procedure: [
+      "Cut equal numbers of zinc and silver discs, perhaps thirty of each, all the same size.",
+      "Cut cardboard or felt rounds of the same diameter and soak them in strong brine.",
+      "Stack in repeating triplets: silver, brine-card, zinc — silver, brine-card, zinc — and so on, building a column.",
+      "Bind the column upright between insulating supports. The top and bottom of the pile are the terminals.",
+      "Touch a wire from the silver end to the zinc end through the tongue, a frog's leg, or a copper sulfate solution — the current flows.",
+    ],
+    chemistry: {
+      equation: "Zn → Zn²⁺ + 2 e⁻   ·   2 H₂O + 2 e⁻ → H₂↑ + 2 OH⁻   (at the silver disc)",
+      explanation:
+        "Two metals of different standard reduction potentials, joined by an electrolyte, set up an electrochemical cell. Zinc, the more reactive, is oxidised to Zn²⁺ and gives up two electrons per atom; the electrons travel through the external circuit and reduce water at the silver disc to liberate hydrogen. The brine-soaked card carries the ionic current to close the loop. A single zinc–silver cell gives about 0.9 V; a pile of thirty cells gives nearly 30 V, enough to feel sharply on the tongue and to light a fine wire. Volta did not know any of this; he thought the current was created by the mere contact of the metals. Davy and Faraday later showed that the chemistry was the source.",
+    },
+    hazards: [
+      "Modest as a battery — the current of a thirty-cell pile is a few milliamperes.",
+      "Spilled electrolyte is corrosive to the metals; the brine creep that destroys old batteries was a problem from the first.",
+      "Electrolysing water releases hydrogen and oxygen, an explosive mixture; ventilate.",
+    ],
+    lore:
+      "Volta demonstrated the pile to Napoleon in Paris in November 1801. The Emperor, delighted, struck a special medal for him and pinned it on his chest. The unit of electric potential — the volt — was named for him by international agreement in 1881, twenty-six years after his death.",
+    sources: [
+      {
+        kind: "paper",
+        author: "Alessandro Volta",
+        title: "On the Electricity excited by the mere Contact of conducting Substances of different kinds",
+        year: "1800",
+        cite: "Philosophical Transactions of the Royal Society of London, 90, 403–431",
+        holding: "Royal Society",
+        url: "https://royalsocietypublishing.org/doi/10.1098/rstl.1800.0018",
+        note: "Letter to Sir Joseph Banks, dated 20 March 1800; the founding document of electrochemistry.",
+      },
+    ],
+  },
+  {
+    slug: "woehler-urea",
+    name: "Wöhler's Urea",
+    aka: ["The Synthesis that Killed Vitalism", "Künstliche Bildung des Harnstoffs"],
+    glyph: "🜮",
+    era: "1828",
+    origin: "Berlin",
+    discoverer: "Friedrich Wöhler",
+    hazardLevel: 1,
+    tagline:
+      "A first organic compound of life synthesised from purely mineral starting materials — the experiment that ended the doctrine that 'organic' matter required a vital force.",
+    history:
+      "In February 1828 the young Friedrich Wöhler wrote to his teacher Berzelius: 'I must tell you that I can prepare urea without requiring kidneys, or even an animal, either man or dog.' He had been trying to make ammonium cyanate by reacting silver cyanate with ammonium chloride; on evaporating the solution he obtained colourless crystals that proved, on every test, to be identical with the urea filtered from human urine. The accepted doctrine of vitalism — that organic compounds could be produced only by a living organism, through the action of a vis vitalis — was wrong. Within fifty years organic chemistry was synthesising sugars, dyes, drugs, and proteins. The Wöhler synthesis is regarded as the founding experiment of organic chemistry as a science.",
+    reagents: [
+      { archaic: "Silver Cyanate", modern: "Silver cyanate (AgOCN)" },
+      { archaic: "Sal Ammoniac", modern: "Ammonium chloride (NH₄Cl)", materialSlug: "sal-ammoniac" },
+    ],
+    procedure: [
+      "Prepare silver cyanate by precipitating it from silver nitrate and potassium cyanate solutions; wash and dry the white solid.",
+      "Suspend the silver cyanate in water and add an equivalent of ammonium chloride. A heavy white precipitate of silver chloride falls.",
+      "Filter off the silver chloride. The filtrate contains ammonium cyanate in solution.",
+      "Gently evaporate the filtrate to dryness on a water bath. The expected ammonium cyanate is not what crystallises out — instead, colourless prismatic crystals of urea remain.",
+      "Confirm by every chemical test — solubility, melting point, decomposition products — that the crystals are identical to natural urea.",
+    ],
+    chemistry: {
+      equation: "AgOCN + NH₄Cl → AgCl↓ + NH₄OCN → (NH₂)₂CO",
+      explanation:
+        "Ammonium cyanate is a metastable intermediate. In solution it slowly isomerises — the cyanate's terminal nitrogen attacks the carbon, the ring opens, and a proton transfer gives the symmetric urea molecule. The two compounds have exactly the same molecular formula (CH₄N₂O), but they are very different in arrangement: ammonium cyanate is ionic, urea is a planar amide. It is the first recorded example of an isomerisation, and it forced chemists to acknowledge that the architecture of a molecule — not just its atomic count — determines its properties.",
+    },
+    hazards: [
+      "Urea itself is benign — present at gram-per-day quantities in every mammal.",
+      "Silver cyanate is mildly toxic and shock-sensitive when dry.",
+      "Avoid heating the urea solution too strongly; it will continue to decompose to biuret and ammelide.",
+    ],
+    lore:
+      "Berzelius, on receiving Wöhler's letter, wrote back: 'this is a great and beautiful discovery, an epoch in chemistry.' Vitalism did not die overnight — biologists held variants of it well into the twentieth century — but the philosophical wall between organic and inorganic matter had a hole knocked in it that February, and no one ever closed it.",
+    sources: [
+      {
+        kind: "paper",
+        author: "Friedrich Wöhler",
+        title: "Ueber künstliche Bildung des Harnstoffs",
+        year: "1828",
+        cite: "Annalen der Physik und Chemie, 88, 253–256",
+        url: "https://onlinelibrary.wiley.com/doi/10.1002/andp.18280880206",
+        note: "The four-page paper that founded modern organic chemistry.",
+      },
+    ],
+  },
+  {
+    slug: "synthetic-ultramarine",
+    name: "Synthetic Ultramarine",
+    aka: ["French Ultramarine", "Outremer artificiel", "Guimet's Blue"],
+    glyph: "🜇",
+    era: "1828",
+    origin: "Toulouse, France",
+    discoverer: "Jean-Baptiste Guimet (independently, C. G. Gmelin)",
+    hazardLevel: 1,
+    tagline:
+      "The royal blue of medieval altarpieces, manufactured from kaolin and sulfur for less than the price of common chalk — the dethroning of lapis lazuli.",
+    history:
+      "Genuine ultramarine, ground from lapis lazuli mined in Afghanistan, was the most expensive pigment of the Renaissance — at one point dearer by weight than gold. Patrons specified its use by quantity in contracts (Vermeer used it; Titian preferred it). In 1824 the French Société d'Encouragement pour l'Industrie Nationale offered a 6,000-franc prize to anyone who could synthesise it for under 300 francs per kilogram. In 1828 Jean-Baptiste Guimet won the prize; the German chemist Gmelin announced the same synthesis independently a few months later, and the two argued priority for decades. The synthetic pigment is chemically indistinguishable from the natural one: the same sodium aluminium silicate cage trapping the same trisulfide radical anion responsible for the colour. Within fifteen years Guimet's process had reduced the price of ultramarine ten-thousand-fold and put the blue of cathedral ceilings into every cottage curtain.",
+    reagents: [
+      { archaic: "Pipe Clay", modern: "Kaolin (Al₂Si₂O₅(OH)₄)" },
+      { archaic: "Pot Ashes", modern: "Sodium carbonate (Na₂CO₃)", note: "Modern substitution for the original wood-ash potash", materialSlug: "potash" },
+      { archaic: "Brimstone", modern: "Sulfur (S₈)", materialSlug: "sulfur" },
+      { archaic: "Black Coals", modern: "Charcoal (C)", materialSlug: "charcoal" },
+      { archaic: "—", modern: "Quartz sand (SiO₂)", materialSlug: "silica" },
+    ],
+    procedure: [
+      "Grind kaolin, sodium carbonate, sulfur, charcoal, and a small portion of fine silica to a uniform paste.",
+      "Pack the paste tightly into fireclay crucibles and lid them.",
+      "Heat at red heat (750–800 °C) under a reducing atmosphere for about ten hours.",
+      "Cool slowly. The contents emerge as a green mass — green ultramarine.",
+      "Reheat the green product in air at a lower temperature. The colour transforms over minutes from green through blue-green to a deep, brilliant blue.",
+      "Grind under water for hours; the longer the grinding, the more uniform the colour.",
+    ],
+    chemistry: {
+      equation: "Na₈[Al₆Si₆O₂₄]·S₃⁻· — sodalite cage + (S₃)⁻ chromophore",
+      explanation:
+        "Ultramarine is a sodalite-framework aluminosilicate — a cage of interconnected silica and alumina tetrahedra forming roughly cubic cavities. Inside the cavities sit sodium cations and, crucially, the radical trisulfide anion S₃⁻, which absorbs orange-red light at 600 nm and gives the brilliant blue colour. The green intermediate contains the S₂⁻ anion instead; oxidation to S₃⁻ is what turns it blue. The pigment is unusually stable because the chromophore is sealed inside the lattice; it does not bleach in sunlight or react with most pigments mixed with it. Acid hydrolysis is its only weakness — and acid rain has now begun to fade old Italian blue ultramarine skies after five hundred years.",
+    },
+    hazards: [
+      "Mildly toxic only if the dust is inhaled in large quantities, like any silicate.",
+      "Hydrogen sulfide is evolved if the pigment is treated with acid — a useful test, and a warning.",
+      "The crucible firing requires a reducing atmosphere and produces sulfurous fumes; ventilate.",
+    ],
+    lore:
+      "Yves Klein, looking for a blue more brilliant than any commercial ultramarine could give him, worked with the chemist Edouard Adam in 1957 to suspend the pure pigment in a clear polyvinyl-acetate binder rather than the linseed oil that dulls the colour. The result — International Klein Blue — is Guimet's pigment, finally allowed to give the full intensity it was always capable of.",
+    sources: [
+      {
+        kind: "paper",
+        author: "Jean-Baptiste Guimet",
+        title: "Sur la composition et la fabrication artificielle de l'outremer",
+        year: "1828",
+        cite: "Bulletin de la Société d'Encouragement pour l'Industrie Nationale, 27, 4–10",
+        note: "Award announcement and procedural sketch; full process kept proprietary at the Fleurieu-sur-Saône works.",
+      },
+      {
+        kind: "paper",
+        author: "Christian Gottlob Gmelin",
+        title: "Über die künstliche Darstellung des Ultramarins",
+        year: "1828",
+        cite: "Annalen der Physik und Chemie, 14, 360–371",
+        url: "https://onlinelibrary.wiley.com/doi/10.1002/andp.18280900611",
+      },
+    ],
+  },
+  {
+    slug: "marsh-test",
+    name: "The Marsh Test",
+    aka: ["Marsh's Test for Arsenic", "The Arsenic Mirror"],
+    glyph: "🜺",
+    era: "1836",
+    origin: "Royal Arsenal at Woolwich, England",
+    discoverer: "James Marsh",
+    hazardLevel: 3,
+    tagline:
+      "A glass tube, zinc, and dilute sulfuric acid that revealed trace arsenic as a black mirror — the forensic test that ended a four-hundred-year tradition of slow poisoning.",
+    history:
+      "Arsenic — colourless, tasteless, mimicking the symptoms of cholera — was the murderer's metal for four centuries. The Borgias used it; the seventeenth-century Aqua Tofana sold under that name killed several hundred Romans in a generation. The available chemical tests were unreliable, gave false negatives at the doses commonly used, and would not work on a decomposed body. In 1832 the chemist James Marsh, working at the Royal Arsenal, was called as expert witness in the trial of John Bodle for poisoning his grandfather; Marsh's test using Scheele's method gave a positive result, but the precipitate degraded between the laboratory and the courtroom, and the jury acquitted. Bodle later confessed. Marsh, furious, devised a new test that produced an unmistakable, stable, demonstrable result. He published it in 1836; within five years it was used in every European court, and the arsenic-poisoning rate of certain wealthy families dropped overnight.",
+    reagents: [
+      { archaic: "Zinc", modern: "Granulated zinc (Zn)", materialSlug: "zinc" },
+      { archaic: "Oil of Vitriol", modern: "Dilute sulfuric acid (H₂SO₄)", materialSlug: "sulfuric-acid" },
+      { archaic: "—", modern: "The suspect sample (tissue, hair, stomach contents, etc.)", note: "Digested in acid first" },
+    ],
+    procedure: [
+      "Place the suspect sample in a flask with granulated zinc.",
+      "Add dilute sulfuric acid; hydrogen gas evolves at once.",
+      "If arsenic is present in any form, it is reduced to arsine gas (AsH₃) and carried out with the hydrogen.",
+      "Lead the gas through a drying tube and then through a horizontally drawn-out glass tube heated to red heat at one point with a small spirit-lamp flame.",
+      "Decomposition of the arsine deposits a brilliant black mirror of elemental arsenic on the cool glass just past the flame — visible at quantities as low as 20 micrograms.",
+      "Compare the deposit's solubility and reactions with known arsenic mirrors to distinguish from antimony.",
+    ],
+    chemistry: {
+      equation: "Zn + H₂SO₄ → ZnSO₄ + H₂↑   ·   As³⁺/As⁵⁺ + nascent H → AsH₃↑   ·   2 AsH₃ → 2 As↓ + 3 H₂↑",
+      explanation:
+        "Zinc dissolving in acid generates nascent hydrogen — the highly reactive monoatomic form of the element, briefly present at the metal surface. Nascent hydrogen reduces any arsenic compound present to the volatile hydride, arsine (AsH₃), a colourless gas with a faint garlic smell. Heated, arsine decomposes back to its elements; the metallic arsenic, with nothing to react with, deposits as a mirror-bright film on the cool glass beyond the heated zone. The same procedure produces a similar mirror for antimony (SbH₃), but the antimony deposit dissolves in sodium hypochlorite while the arsenic mirror does not.",
+    },
+    hazards: [
+      "Arsine itself is one of the most acutely toxic gases known — far more dangerous than the arsenic the test is hunting.",
+      "The procedure produces large volumes of hydrogen; an open flame is required for the test but ventilation is essential.",
+      "Tests must be controlled with known arsenic-free reagents — zinc and acid both commonly carry traces of arsenic from their manufacture.",
+    ],
+    lore:
+      "The first famous conviction by Marsh test was Marie Lafarge in 1840, accused of poisoning her husband with arsenic in his pudding. Mathieu Orfila, summoned from Paris, conducted the test in court. The mirror appeared. Lafarge was sentenced to hard labour. The trial was the first murder case in history decided by chemical evidence, and made the front pages across Europe.",
+    sources: [
+      {
+        kind: "paper",
+        author: "James Marsh",
+        title: "Account of a Method of Separating Small Quantities of Arsenic from Substances with which it may be mixed",
+        year: "1836",
+        cite: "Edinburgh New Philosophical Journal, 21, 229–236",
+        note: "The procedure as Marsh first published it, with a careful diagram of the apparatus.",
+      },
+    ],
+  },
+  {
+    slug: "nitroglycerin",
+    name: "Nitroglycerin & Dynamite",
+    aka: ["Pyroglycerin", "Trinitroglycerin", "Glonoin"],
+    glyph: "🝁",
+    era: "1847 (Sobrero) · 1867 (Nobel)",
+    origin: "Turin, then Krümmel, Schleswig-Holstein",
+    discoverer: "Ascanio Sobrero (synthesis); Alfred Nobel (stabilisation)",
+    hazardLevel: 5,
+    tagline:
+      "A clear oily liquid more explosive by weight than anything yet known — and the diatomite-soaked stick that made it safe enough to build the modern world.",
+    history:
+      "Ascanio Sobrero, a student of Pelouze in Paris, produced nitroglycerin in 1847 by adding glycerin to a mixture of cold nitric and sulfuric acids. The product was so violent — a drop on an anvil produced a deafening crack and shattered the iron — that Sobrero, horrified, refused to develop it and warned against its use. Alfred Nobel, also Pelouze's student, would not be warned. After fifteen years of experiments in which his own brother Emil and four assistants were killed, Nobel discovered in 1867 that absorbing the oil into the powdery diatomaceous earth of Krümmel produced a putty-like material — dynamite — that could be cut, dropped, and even burnt without exploding, but detonated reliably with a mercury fulminate cap. The Suez Canal, the Saint-Gotthard Tunnel, the Panama Canal, every great civil-engineering work of the late nineteenth and early twentieth centuries was blasted with Nobel's invention. He left his fortune to fund the prizes that bear his name.",
+    reagents: [
+      { archaic: "Sweet Oil of Vitriol", modern: "Glycerin (C₃H₅(OH)₃)", note: "Saponification by-product, then cheap" },
+      { archaic: "Oil of Vitriol", modern: "Sulfuric acid (H₂SO₄)", materialSlug: "sulfuric-acid" },
+      { archaic: "Spirit of Nitre", modern: "Nitric acid (HNO₃)", materialSlug: "nitric-acid" },
+      { archaic: "Kieselguhr", modern: "Diatomaceous earth (porous silica)", note: "Nobel's stabilising matrix for dynamite", materialSlug: "silica" },
+    ],
+    procedure: [
+      "DO NOT attempt this. Recorded here as a matter of history.",
+      "Chill a mixture of three parts sulfuric acid to one part nitric acid in an ice bath below 10 °C.",
+      "Add glycerin drop by drop, with violent stirring, keeping the temperature always below 30 °C.",
+      "When all glycerin is in, pour the mixture into ice water; the nitroglycerin separates as a heavy, oily layer.",
+      "Wash repeatedly with sodium-carbonate solution to remove all traces of acid (an unwashed product self-detonates within hours).",
+      "For dynamite: knead three parts nitroglycerin into one part diatomaceous earth; form into paper-wrapped sticks; fit each with a copper detonator cap.",
+    ],
+    chemistry: {
+      equation: "C₃H₅(OH)₃ + 3 HNO₃ → C₃H₅(ONO₂)₃ + 3 H₂O   ·   4 C₃H₅(ONO₂)₃ → 12 CO₂ + 10 H₂O + 6 N₂ + O₂",
+      explanation:
+        "Nitric acid esterifies each of the three hydroxyl groups of glycerin, replacing OH with ONO₂. The product is an explosive of extraordinary energy density: detonation expands the volume by a factor of about a thousand in microseconds, and the shock wave travels through the material at 7,700 m/s. Every product of the detonation is a gas — carbon dioxide, water vapour, nitrogen, oxygen — and the perfect oxygen balance of the molecule is what makes it so violent; nothing is left to drag the reaction down. The diatomaceous earth in dynamite contains the shock by absorbing the initial perturbation, so that it requires the sharper percussion of a detonator cap to start the chain.",
+    },
+    hazards: [
+      "Pure nitroglycerin detonates from a sharp blow, a temperature change, or no apparent cause at all.",
+      "Cannot be safely synthesised, handled, or transported outside of a dedicated explosives plant.",
+      "Workers in nineteenth-century nitroglycerin factories developed 'Monday morning headaches' from skin absorption of the vasodilator — the same compound is still used as the heart medicine glyceryl trinitrate.",
+    ],
+    lore:
+      "When Nobel was wrongly reported dead in 1888 (a brother's obituary mistakenly run as his), he read in a French newspaper that 'the merchant of death is dead' and that he had 'become rich by finding ways to kill more people faster than ever before.' Eight years later, on his actual death, his will left the bulk of his fortune — equivalent to about 250 million euros today — to establish the prizes for physics, chemistry, medicine, literature, and peace.",
+    sources: [
+      {
+        kind: "paper",
+        author: "Ascanio Sobrero",
+        title: "Sur plusieurs composés détonants produits avec l'acide nitrique et le sucre, la dextrine, la lactine, la mannite et la glycérine",
+        year: "1847",
+        cite: "Comptes rendus hebdomadaires des séances de l'Académie des sciences, 25, 247–248",
+        url: "https://gallica.bnf.fr/ark:/12148/bpt6k29822",
+        note: "Sobrero's note to the Académie des Sciences, in which he warns against using the substance.",
+      },
+      {
+        kind: "patent",
+        author: "Alfred Nobel",
+        title: "Improved Explosive Compound (Dynamite)",
+        year: "1867",
+        cite: "British Patent No. 1,345 / US Patent 78,317 (1868)",
+        url: "https://patents.google.com/patent/US78317",
+        note: "The patent that stabilised nitroglycerin by adsorption onto kieselguhr.",
+      },
+    ],
+  },
+  {
+    slug: "mauveine",
+    name: "Mauveine",
+    aka: ["Aniline Purple", "Perkin's Mauve", "Tyrian Purple of Coal-Tar"],
+    glyph: "🜔",
+    era: "1856",
+    origin: "Cable Street, East London",
+    discoverer: "William Henry Perkin",
+    hazardLevel: 2,
+    tagline:
+      "A purple residue at the bottom of a failed quinine synthesis — the first commercial synthetic dye, and the start of the modern chemical industry.",
+    history:
+      "Perkin was eighteen, working in his attic over the Easter holiday of 1856, trying to synthesise quinine from coal-tar aniline at the urging of his teacher Hofmann. He failed — the molecule he was after needed a structure no one would understand for thirty years — and what he got instead was a black tarry residue. About to wash it away, he noticed that a solution of the tar in alcohol stained a piece of silk a clear, brilliant purple that did not fade in water or sunlight. He patented the dye that August, persuaded his father to mortgage the family home, and built a factory at Greenford Green outside London. Within five years mauve had spread from the dresses of Eugénie of France and Queen Victoria to working-class wedding gowns; the colour briefly named a decade (the 'Mauve Decade' of the 1890s), and the synthetic-dye industry that followed it built modern Germany. The pharmaceutical industry that grew out of dye chemistry — aniline drugs, sulfa drugs, aspirin — has its origin in Perkin's accidental purple.",
+    reagents: [
+      { archaic: "Coal Tar", modern: "Aniline (C₆H₅NH₂) with toluidine impurities", note: "The aniline of 1856 was about 5% toluidine; pure aniline gives almost no mauveine" },
+      { archaic: "—", modern: "Potassium dichromate (K₂Cr₂O₇)", note: "Oxidiser" },
+      { archaic: "Oil of Vitriol", modern: "Sulfuric acid (H₂SO₄)", materialSlug: "sulfuric-acid" },
+      { archaic: "Spirit of Wine", modern: "Ethanol", note: "Solvent for the dye", materialSlug: "spirit-of-wine" },
+    ],
+    procedure: [
+      "Dissolve crude commercial aniline (containing 4-methylaniline / toluidine impurities) in dilute sulfuric acid.",
+      "Slowly add potassium dichromate solution at room temperature, with stirring; a thick black precipitate forms over hours.",
+      "Filter the precipitate, wash with water, and dry.",
+      "Extract the dry black solid with hot alcohol — the alcoholic extract is a deep purple.",
+      "Filter off the insoluble tar. Test by dipping a strip of silk: the silk takes a fast brilliant purple stain.",
+      "For the dye-house: precipitate the colouring matter from alcohol by addition of water, dry, and pack for shipment.",
+    ],
+    chemistry: {
+      equation: "C₆H₅NH₂ + 2 × (CH₃)C₆H₄NH₂ + K₂Cr₂O₇/H⁺ → C₂₆H₂₃N₄⁺ (mauveine A) + by-products",
+      explanation:
+        "The active reaction is the oxidative coupling of one aniline molecule with two toluidine molecules to form a phenazinium cation — a tricyclic aromatic system with a positive charge delocalised over the whole structure. The chromophore is responsible for the colour; the cationic charge means the dye binds to anionic silk-protein side chains by ionic attraction. Perkin's product is in fact a mixture — modern HPLC analysis identifies at least six related phenazinium dyes, with mauveine A and mauveine B as the principal components. The structure was not worked out until the 1980s.",
+    },
+    hazards: [
+      "Aniline is toxic by inhalation, ingestion, and skin absorption; nineteenth-century dye workers suffered chronic poisoning.",
+      "Potassium dichromate is a carcinogen and a strong oxidiser; modern dye chemistry has abandoned it for safer reagents.",
+      "The finished dye is mild — silk dyed with it has been worn for 170 years without ill effect.",
+    ],
+    lore:
+      "Queen Victoria wore mauve to her daughter's wedding in 1858, and the dress became the fashion event of the year. Punch ran cartoons about 'mauve measles.' The dye was so profitable that Perkin retired aged thirty-six and spent the rest of his life on pure research, including the synthesis of coumarin, the first artificial perfume.",
+    sources: [
+      {
+        kind: "patent",
+        author: "William Henry Perkin",
+        title: "Producing a New Colouring Matter for Dyeing with a Lilac or Purple Color Stuffs of Silk, Cotton, Wool, or other Materials",
+        year: "1856",
+        cite: "British Patent No. 1,984 of 26 August 1856",
+        url: "https://patents.google.com/patent/GB185601984A",
+        note: "Granted to Perkin at the age of eighteen; the founding patent of the synthetic-dye industry.",
+      },
+    ],
+  },
+  {
+    slug: "aspirin",
+    name: "Aspirin",
+    aka: ["Acetylsalicylic Acid", "ASA", "Bayer's Aspirin"],
+    glyph: "🜉",
+    era: "1897",
+    origin: "Elberfeld, Germany",
+    discoverer: "Felix Hoffmann (Bayer); Arthur Eichengrün (procedure)",
+    hazardLevel: 2,
+    tagline:
+      "A small modification to a folk medicine — acetylating the salicylic acid found in willow bark — that produced the first true blockbuster drug.",
+    history:
+      "The bark of the willow was a known fever-reducer in classical antiquity; Hippocrates recommended it. Its active principle, salicylic acid, was isolated in 1828 and synthesised industrially by the 1870s, but the acid was so harsh on the stomach lining that patients refused to keep taking it. On 10 August 1897 Felix Hoffmann, a chemist at Bayer in Elberfeld, reacted salicylic acid with acetic anhydride in a one-pot procedure that gave clean acetylsalicylic acid. Whether the credit belongs to Hoffmann alone or to his manager Arthur Eichengrün — who later, writing from a concentration camp during the war, claimed the synthesis as his own — is still argued. The drug was patented in Germany and the United States, marketed as Aspirin from 1899, and within a decade had supplanted morphine and quinine as the most-prescribed medication on earth. The world consumes about 40,000 tonnes of aspirin each year.",
+    reagents: [
+      { archaic: "—", modern: "Salicylic acid (C₇H₆O₃)", note: "Originally from willow bark; now from sodium phenolate and CO₂ (Kolbe-Schmitt)" },
+      { archaic: "—", modern: "Acetic anhydride ((CH₃CO)₂O)", note: "The acetyl donor" },
+      { archaic: "Oil of Vitriol", modern: "Sulfuric acid (H₂SO₄)", note: "Catalyst, a few drops only", materialSlug: "sulfuric-acid" },
+    ],
+    procedure: [
+      "Dissolve salicylic acid in an excess of acetic anhydride in a small flask.",
+      "Add three drops of concentrated sulfuric acid as catalyst.",
+      "Warm gently on a water bath at 60 °C for fifteen minutes; the solid dissolves completely.",
+      "Pour the warm mixture onto crushed ice. White prismatic crystals of acetylsalicylic acid precipitate at once.",
+      "Filter on a Büchner funnel, wash with ice-cold water, and recrystallise from a mixture of ethanol and water.",
+      "The dry product melts sharply at 135 °C — a standard purity test still used today.",
+    ],
+    chemistry: {
+      equation: "C₇H₆O₃ + (CH₃CO)₂O → C₉H₈O₄ + CH₃COOH",
+      explanation:
+        "The phenolic hydroxyl of salicylic acid attacks the carbonyl carbon of acetic anhydride; one acetyl group is transferred to the phenol oxygen, and the other leaves as acetic acid. The product is acetylsalicylic acid — the parent molecule's stomach-irritating phenol is now masked as an ester, which the body's esterases slowly hydrolyse back to salicylate over hours. In the bloodstream the salicylate inhibits cyclooxygenase, blocking the synthesis of prostaglandins responsible for pain, fever, and platelet aggregation. John Vane worked out the mechanism in 1971 and won the 1982 Nobel Prize for it.",
+    },
+    hazards: [
+      "Stomach bleeding from chronic use; the irritation that salicylic acid causes raw, aspirin causes more slowly.",
+      "Reye's syndrome in children with viral infections — children under sixteen should not take aspirin for a fever.",
+      "Combined with anticoagulants the bleeding risk multiplies; aspirin's own antiplatelet effect is why it is now prescribed at low dose for heart-attack prevention.",
+    ],
+    lore:
+      "The name aspirin comes from acetyl (Latin), spirsäure (the German name for salicylic acid derived from Spiraea ulmaria, the meadowsweet), and the suffix -in commonly used for drugs of the period. Bayer lost the trademark to the British and US governments after the First World War as part of war reparations, which is why the word aspirin is generic in most of the English-speaking world but still a Bayer trademark in Germany.",
+    sources: [
+      {
+        kind: "patent",
+        author: "Felix Hoffmann / Bayer & Co.",
+        title: "Acetyl Salicylic Acid",
+        year: "1900",
+        cite: "US Patent 644,077, filed 1 Aug 1898, granted 27 Feb 1900",
+        url: "https://patents.google.com/patent/US644077",
+        note: "The US patent that made Aspirin a worldwide brand; the German DRP 36,433 of 1899 was struck down on prior art.",
+      },
+      {
+        kind: "paper",
+        author: "Arthur Eichengrün",
+        title: "50 Jahre Aspirin",
+        year: "1949",
+        cite: "Die Pharmazie, 4, 582–584",
+        note: "Eichengrün's contested claim, written shortly after his release from Theresienstadt, that he and not Hoffmann directed the original synthesis.",
+      },
+    ],
+  },
+  {
+    slug: "haber-process",
+    name: "The Haber Process",
+    aka: ["Haber–Bosch Synthesis", "The Fixation of Atmospheric Nitrogen"],
+    glyph: "🜼",
+    era: "1909",
+    origin: "Karlsruhe → Ludwigshafen, Germany",
+    discoverer: "Fritz Haber (synthesis); Carl Bosch (industrial scale)",
+    hazardLevel: 4,
+    tagline:
+      "Atmospheric nitrogen forced into combination with hydrogen at 200 atmospheres over an iron catalyst — the reaction that feeds half the world.",
+    history:
+      "By 1900 the world's growing population was approaching the limit of what natural nitrogen sources — Chilean caliche, guano, manure, leguminous crop rotation — could fertilise. The chemist Sir William Crookes, in his 1898 address to the British Association, warned that 'all civilised nations stand in deadly peril of not having enough to eat.' Fritz Haber, professor at Karlsruhe, demonstrated in July 1909 that nitrogen and hydrogen would combine over an osmium catalyst at 200 atmospheres and 500 °C to give ammonia in fractional yields — small, but for the first time, a directly worked reaction. Carl Bosch at BASF scaled it; by 1913 the Oppau plant was making twenty tonnes of ammonia a day with an iron-based catalyst that has scarcely changed in a hundred years. The fertiliser produced from Haber ammonia now sustains the food supply of about four billion of the eight billion people on earth — meaning that roughly half the nitrogen atoms in the proteins of your body came through a Haber-Bosch reactor. The process is also the basis of every nitrogen-bearing explosive made since 1914.",
+    reagents: [
+      { archaic: "—", modern: "Nitrogen (N₂)", note: "From liquefied air" },
+      { archaic: "—", modern: "Hydrogen (H₂)", note: "From steam reforming of methane in modern plants; originally from water gas" },
+      { archaic: "—", modern: "Iron catalyst (Fe with K₂O, Al₂O₃ promoters)", note: "Haber's original was osmium, then uranium; Mittasch settled on promoted iron" },
+    ],
+    procedure: [
+      "Compress a 3 : 1 mixture of hydrogen and nitrogen to about 200 atmospheres.",
+      "Pre-heat the compressed gas to 400–500 °C and pass it over a bed of porous iron promoted with traces of potassium and aluminium oxides.",
+      "Ammonia is formed in a few percent yield per pass; the gas mixture is cooled and the ammonia liquefies and is drawn off.",
+      "Unreacted nitrogen and hydrogen are recompressed and recycled. Over many passes nearly all the nitrogen is converted.",
+      "The product, anhydrous ammonia, is shipped under pressure or absorbed into water to give the familiar aqueous solution.",
+    ],
+    chemistry: {
+      equation: "N₂(g) + 3 H₂(g) ⇌ 2 NH₃(g)   ΔH = −92 kJ/mol",
+      explanation:
+        "The reaction is favourable by enthalpy but unfavourable by entropy — four molecules of gas become two. Le Chatelier's principle says high pressure pushes the equilibrium right (fewer molecules of gas); low temperature also pushes it right but slows the kinetics until the catalyst becomes essential. Haber's contribution was to find the sweet spot — high pressure, moderate temperature, an effective catalyst — and to design a reactor that recycled the unreacted gases. The catalysis is heterogeneous: nitrogen molecules dissociate on the iron surface (the rate-limiting step, because the N≡N triple bond is one of the strongest in chemistry), the atoms migrate, and hydrogen adds stepwise to NH, NH₂, and NH₃, which finally desorbs.",
+    },
+    hazards: [
+      "Anhydrous ammonia is acutely toxic; concentrations above 300 ppm in air are lethal.",
+      "The high-pressure reactor and hydrogen feed gas combine the worst features of a pressure vessel and a fuel-air bomb; the Oppau plant exploded in 1921, killing 561 people.",
+      "Nitrogen oxides released from over-fertilised agricultural runoff are a leading cause of ocean dead zones and freshwater eutrophication worldwide.",
+    ],
+    lore:
+      "Haber won the 1918 Nobel Prize for the synthesis. The award was bitterly controversial: Haber had also led the German chemical warfare programme, supervising the first chlorine attack at Ypres in 1915. His wife Clara Immerwahr — also a chemist — opposed the work and committed suicide with his service revolver days after the Ypres attack. Haber, who was Jewish, fled Germany in 1933 and died in a Swiss hotel in 1934. The Zyklon-B used to murder his relatives at Auschwitz was developed at the institute he had directed.",
+    sources: [
+      {
+        kind: "patent",
+        author: "Fritz Haber & Robert Le Rossignol",
+        title: "Verfahren zur synthetischen Darstellung von Ammoniak aus den Elementen",
+        year: "1908",
+        cite: "DRP 235,421 (Deutsches Reichspatent), filed 13 October 1908",
+        url: "https://patents.google.com/patent/DE235421C",
+        note: "The German patent on the synthesis itself; Bosch's later patents covered the industrial process.",
+      },
+      {
+        kind: "paper",
+        author: "Fritz Haber & Robert Le Rossignol",
+        title: "Ueber die technische Darstellung von Ammoniak aus den Elementen",
+        year: "1913",
+        cite: "Zeitschrift für Elektrochemie und angewandte physikalische Chemie, 19, 53–72",
+        note: "Haber's full account of the synthesis once the BASF Oppau plant was running.",
+      },
+    ],
   },
 ];
 

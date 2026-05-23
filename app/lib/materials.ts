@@ -594,6 +594,32 @@ export const materials: Material[] = [
     hazards: "The dust irritates eyes and lungs; heating releases ammonia and HCl gases.",
   },
   {
+    slug: "zinc",
+    name: "Zinc",
+    aka: ["Calamine (as ore)", "Zincum", "Spelter"],
+    formula: "Zn",
+    glyph: "🜦",
+    type: "base",
+    appearance: "Bluish-white metal; brittle at room temperature but malleable when warmed; bright cleavage when cut.",
+    about:
+      "The eighth metal — the one classical alchemy did not know as a metal, though it was alloyed with copper to make brass for millennia (calamine brass). Paracelsus named it in 1526; Marggraf isolated it as a pure element in 1746. The anode in every primary battery from Volta's pile to the modern dry cell.",
+    sources: [
+      {
+        region: "Rajasthan, India (Zawar mines)",
+        note: "The oldest known zinc-smelting site in the world; metallic zinc was produced here by retort distillation from the 9th century CE.",
+      },
+      {
+        region: "Goslar / Rammelsberg, Germany",
+        note: "Calamine ore worked since the Bronze Age; the foundation of the European brass industry.",
+      },
+      {
+        region: "Broken Hill (Australia), Red Dog (Alaska)",
+        note: "The great modern lead-zinc sulfide ore bodies — sphalerite (ZnS) roasted to oxide and reduced with carbon.",
+      },
+    ],
+    hazards: "Zinc metal is essentially non-toxic. Zinc oxide fumes from welding hot-dipped galvanised steel cause 'metal-fume fever' — sweats and headache that pass within a day. Soluble zinc salts are mild emetics.",
+  },
+  {
     slug: "pyrolusite",
     name: "Pyrolusite",
     aka: ["Black Manganese", "Manganesium Nigrum", "Glassmakers' Soap"],

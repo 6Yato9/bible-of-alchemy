@@ -55,6 +55,12 @@ export default function RootLayout({
                 Materia
               </Link>
               <Link
+                href="/manuscripts"
+                className="smallcaps text-[color:var(--color-muted)] hover:text-[color:var(--color-gold-bright)] transition-colors"
+              >
+                Bibliotheca
+              </Link>
+              <Link
                 href="/about"
                 className="smallcaps text-[color:var(--color-muted)] hover:text-[color:var(--color-gold-bright)] transition-colors"
               >
